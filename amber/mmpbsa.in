@@ -1,0 +1,15 @@
+&general
+ startframe=400, endframe=500, interval=10, strip_mask=:WAT:Na+:Cl-:Mg+:K+,
+/
+&gb
+ igb=2, saltcon=0.15,
+/
+&pb
+ istrng=0.15, inp=2, radiopt=0, prbrad=1.4,
+/
+&decomp
+ idecomp=2, dec_verbose=3,
+ print_res=16-24, 35-37, 66-68, 82-89, 129-136, 153-154, 265
+/
+
+

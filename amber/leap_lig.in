@@ -1,0 +1,7 @@
+source leaprc.protein.ff19SB
+source leaprc.gaff2
+LIG = loadmol2 ligand.mol2
+loadamberparams ligand.frcmod
+saveoff LIG lig.lib
+savepdb LIG ligand_gaff.pdb
+quit

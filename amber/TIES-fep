@@ -1,0 +1,42 @@
+#TIES needs pip install pymbar==4.0.1, while yank needs 3.0.3
+pip install pymbar==3.0.3
+#################################################################
+
+#mod: /home/ir/anaconda3/envs/yank/lib/python3.9/site-packages/ties/scripts/ambertools/leap_ligand.in and /home/ir/anaconda3/envs/yank/lib/python3.9/site-packages/ties/scripts/ambertools/leap_complex.in 
+solvateoct sys TIP3PBOX 10
+#mod: /home/ir/anaconda3/envs/yank/lib/python3.9/site-packages/TIES_MD/alch.py 
+line 753 --- DCDReporter(save+'.dcd', 50000)
+#################################################################
+
+
+pdb4amber -i ligand_H.pdb -o ligand_h.pdb 
+
+
+#under the dir with ligands.pdb and pdbfixer_protein_oH.pdb
+ties -action create -l 19.pdb 32.pdb -lff gaff2 -nc 0 -p protein.pdb -md openmm
+
+
+#mod: ./ties/ties919-32/lig/TIES.cfg and ./ties/ties919-32/com/TIES.cfg 
+#How many total replicas of each window are run (we recommend at least 5).
+total_reps = 1
+reps_per_exec = 1
+#Boolean for if we will split all replicas into separate runs. (1 for maximum parallelism)
+#split_run = 1
+box_type = na
+
+sed -i  's/sampling_per_window = 4/sampling_per_window = 0.4/'  ./*/ties*/*/TIES.cfg
+sed -i  's/equili_per_window = 2/equili_per_window = 0.1/'  ./*/ties*/*/TIES.cfg
+sed -i  's/total_reps = 5/total_reps = 12/'  ./*/ties*/*/TIES.cfg
+sed -i  's/split_run = 1/split_run = 0/'  ./*/ties*/*/TIES.cfg
+
+ties_md --config_file=./ties/ties-19-32/lig/TIES.cfg 
+ties_md --config_file=./ties/ties-19-32/com/TIES.cfg 
+
+
+ties_ana --run_type=setup
+#mod: analysis.cfg
+#legs = com, lig
+ties_ana
+
+#################################################################
+TIES has been updated, the version needs "-action" can deal with dummy dihedral.

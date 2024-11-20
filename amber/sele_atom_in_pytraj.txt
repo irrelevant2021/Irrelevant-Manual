@@ -1,0 +1,10 @@
+#pt中原子编号=pymol中rank+1！！！！
+
+pt_system = pt.iterload('SYS_gaff2.crd', 'SYS_gaff2.prmtop') #load
+print(pt_system)
+
+pt_topology = pt_system.top                                  #
+pt_topology.set_reference(pt_system[0])                      #set reference, selecting atom by distance need this
+restraint_array = pt.select_atoms('!(:H*) & !(:WAT) & !(:Na+) & !(:Cl-) & !(:Mg+) & !(:K+) & !(:ZN) & !(:LIG<@5)', pt_topology)
+                                                             #select
+print(restraint_array)

@@ -1,0 +1,321 @@
+
+
+#############################################################################20240313_log##############################################################################
+(autoDL) star@uprotech-server:/media/star/UProtech1/zhennan/RIPK2-0815/amber/RIPK2/POI-6hmx-240219/0219-2$ cpptraj -p SYS_gaff2.prmtop -y prot_lig_prod_2.dcd 
+
+CPPTRAJ: Trajectory Analysis. V6.4.4 (AmberTools)
+    ___  ___  ___  ___
+     | \/ | \/ | \/ | 
+    _|_/\_|_/\_|_/\_|_
+
+| Date/time: 03/13/24 17:09:27
+| Available memory: 29.749 GB
+
+	Reading 'SYS_gaff2.prmtop' as Amber Topology
+	Radius Set: modified Bondi radii (mbondi)
+	Reading 'prot_lig_prod_2.dcd' as Charmm DCD
+	Version < 22; assuming X-aligned cell.
+> align @CA first                                                                                               #######:align和volmap在一个run里
+  [align @CA first]
+    ALIGN: Aligning atoms selected by mask '@CA'
+	Reference is first frame (@CA)
+> volmap centermask :62 0.5 0.5 0.5 :WAT peakcut 0.05 peakfile peaks.xyz                                        ########:62是目标水分子附近的残基，文献中是peakcut 0.05
+  [volmap centermask :62 0.5 0.5 0.5 :WAT peakcut 0.04 peakfile peaks.xyz]
+	Changed DataFile 'peaks.xyz' type to Peaks for set VOLMAP_00001[peaks]
+    VOLMAP: Grid spacing will be 0.50x0.50x0.50 Angstroms
+	Using single precision grid.
+	Grid centered around mask :62 with 3.00 Ang. clearance
+	Gridding atoms in mask ':WAT'
+	Using van der Waals radii if present, elemental radii otherwise.
+	Dividing radii by 1.000000
+	Factor for determining number of bins to smear Gaussian is 4.100000
+	Exponential for Gaussians will be approximated using cubic splines
+	  with a spacing of 0.01 Ang.
+# Citation: Roe, D. R.; Brooks, B. R.; "Improving the Speed of Volumetric
+#           Density Map Generation via Cubic Spline Interpolation".
+#           Journal of Molecular Graphics and Modelling (2021).
+	Grid dataset name is 'VOLMAP_00001'
+	Total grid volume dataset name is 'VOLMAP_00001[totalvol]'
+	Density peaks above 0.040 will be saved to VOLMAP_00001[peaks]
+	Density peaks will be printed to peaks.xyz in XYZ format.
+> run
+  [run]
+---------- RUN BEGIN -------------------------------------------------
+
+PARAMETER FILES (1 total):
+ 0: SYS_gaff2.prmtop, 46769 atoms, 14318 res, box: Orthorhombic, 14013 mol, 13876 solvent
+
+INPUT TRAJECTORIES (1 total):
+ 0: 'prot_lig_prod_2.dcd' is a CHARMM DCD file (coords) Little Endian 32 bit, Parm SYS_gaff2.prmtop (Orthorhombic box) (reading 50 of 50)
+  Coordinate processing will occur on 50 frames.
+
+BEGIN TRAJECTORY PROCESSING:
+.....................................................
+ACTION SETUP FOR PARM 'SYS_gaff2.prmtop' (2 actions):
+  0: [align @CA first]
+	Target mask: [@CA](306)
+	Reference topology: SYS_gaff2.prmtop
+	Reference mask: [@CA](306)
+  1: [volmap centermask :62 0.5 0.5 0.5 :WAT peakcut 0.04 peakfile peaks.xyz]
+	Volmap: Grid mask [:WAT] selects 41628 atoms.
+	Volmap: Centered mask [:62] selects 15 atoms.
+	Memory used by table and splines: 159.512 kB
+Warning: 27752 atoms have 0.0 radii and will be skipped.
+----- prot_lig_prod_2.dcd (1-50, 1) -----
+ 0% 10% 20% 31% 41% 51% 61% 71% 82% 92% 100% Complete.
+
+Read 50 frames and processed 50 frames.
+TIME: Avg. throughput= 460.2738 frames / second.
+
+ACTION OUTPUT:
+	7369 occupied voxels, voxel volume= 0.125000 Ang^3, total volume 921.125000 Ang^3
+Volmap: 11 density peaks found with higher density than 0.0400                                                 ###############:有11个水密度较高，生成peaks.xyz文件
+TIME: Analyses took 0.0000 seconds.
+
+DATASETS (3 total):
+	VOLMAP_00001 "VOLMAP_00001" (float grid), size is 7480 (29.952 kB)
+	VOLMAP_00001[peaks] "VOLMAP_00001[peaks]" (vector with scalar), size is 11 (0.275 kB)
+	VOLMAP_00001[totalvol] "VOLMAP_00001[totalvol]" (double), size is 1 (0.008 kB)
+    Total data set memory usage is at least 30.235 kB
+
+DATAFILES (1 total):
+  peaks.xyz (Peaks):  VOLMAP_00001[peaks]
+
+RUN TIMING:
+TIME:		Init               : 0.0001 s (  0.05%)
+TIME:		Trajectory Process : 0.1086 s ( 99.59%)
+TIME:		Action Post        : 0.0001 s (  0.08%)
+TIME:		Analysis           : 0.0000 s (  0.00%)
+TIME:		Data File Write    : 0.0001 s (  0.12%)
+TIME:		Other              : 0.0002 s (  0.00%)
+TIME:	Run Total 0.1091 s
+---------- RUN END ---------------------------------------------------
+> spam peaks.xyz solv WAT reorder name SPAM info SPAM_info.out summary SPAM_sum.out out spam.out               ##############:开始SPAM
+  [spam peaks.xyz solv WAT reorder name SPAM info SPAM_info.out summary SPAM_sum.out out spam.out]
+Warning: 'dgbulk' not specified; using default for SPC/E water.
+Warning: 'dhbulk' not specified; using default for SPC/E water.
+	Attempting to read 11 peaks.
+	Read 11 peaks.
+    SPAM:
+	Solvent [WAT], 11 density peaks taken from peaks.xyz.
+	Occupation information printed to SPAM_info.out.
+	Sites are boxes with edge length 1.250
+	Re-ordering trajectory so each site always has the same water molecule.
+	Using a non-bonded cutoff of 12.00 Ang. with a EEL shifting function.
+	Bulk solvent SPAM free energy: -30.300 kcal/mol
+	Bulk solvent SPAM enthalpy: -22.200 kcal/mol
+	Temperature: 300.000 K
+#Citation: Cui, G.; Swails, J.M.; Manas, E.S.; "SPAM: A Simple Approach
+#          for Profiling Bound Water Molecules"
+#          J. Chem. Theory Comput., 2013, 9 (12), pp 5539–5549.
+> run
+  [run]
+---------- RUN BEGIN -------------------------------------------------
+
+PARAMETER FILES (1 total):
+ 0: SYS_gaff2.prmtop, 46769 atoms, 14318 res, box: Orthorhombic, 14013 mol, 13876 solvent
+
+INPUT TRAJECTORIES (1 total):
+ 0: 'prot_lig_prod_2.dcd' is a CHARMM DCD file (coords) Little Endian 32 bit, Parm SYS_gaff2.prmtop (Orthorhombic box) (reading 50 of 50)
+  Coordinate processing will occur on 50 frames.
+
+BEGIN TRAJECTORY PROCESSING:
+.....................................................
+ACTION SETUP FOR PARM 'SYS_gaff2.prmtop' (1 actions):
+  0: [spam peaks.xyz solv WAT reorder name SPAM info SPAM_info.out summary SPAM_sum.out out spam.out]
+	Found 13876 solvent residues [WAT]
+----- prot_lig_prod_2.dcd (1-50, 1) -----
+ 0% 10% 20% 31% 41% 51% 61% 71% 82% 92% 100% Complete.
+
+Read 50 frames and processed 50 frames.
+TIME: Avg. throughput= 47.9218 frames / second.
+
+ACTION OUTPUT:
+	SPAM timing data:
+TIME:		Residue c.o.m. calc: 0.0092 s (  2.72%)
+TIME:		Peak assignment    : 0.1149 s ( 34.05%)
+TIME:		Occupancy calc.    : 0.0004 s (  0.13%)
+TIME:		Energy calc        : 0.2110 s ( 62.56%)
+TIME:		Residue reordering : 0.0018 s (  0.54%)
+TIME:	SPAM Action Total: 0.3373 s
+TIME: Analyses took 0.0000 seconds.
+
+DATASETS (17 total):
+	VOLMAP_00001 "VOLMAP_00001" (float grid), size is 7480 (29.952 kB)
+	VOLMAP_00001[peaks] "VOLMAP_00001[peaks]" (vector with scalar), size is 11 (0.275 kB)
+	VOLMAP_00001[totalvol] "VOLMAP_00001[totalvol]" (double), size is 1 (0.008 kB)
+	SPAM:1 "SPAM:1" (double), size is 50 (0.400 kB)
+	SPAM:2 "SPAM:2" (double), size is 50 (0.400 kB)
+	SPAM:3 "SPAM:3" (double), size is 50 (0.400 kB)
+	SPAM:4 "SPAM:4" (double), size is 50 (0.400 kB)
+	SPAM:5 "SPAM:5" (double), size is 50 (0.400 kB)
+	SPAM:6 "SPAM:6" (double), size is 50 (0.400 kB)
+	SPAM:7 "SPAM:7" (double), size is 50 (0.400 kB)
+	SPAM:8 "SPAM:8" (double), size is 50 (0.400 kB)
+	SPAM:9 "SPAM:9" (double), size is 50 (0.400 kB)
+	SPAM:10 "SPAM:10" (double), size is 50 (0.400 kB)
+	SPAM:11 "SPAM:11" (double), size is 50 (0.400 kB)
+	SPAM[DG] "SPAM[DG]" (X-Y mesh), size is 11 (0.176 kB)
+	SPAM[DH] "SPAM[DH]" (X-Y mesh), size is 11 (0.176 kB)
+	SPAM[-TDS] "SPAM[-TDS]" (X-Y mesh), size is 11 (0.176 kB)
+    Total data set memory usage is at least 35.163 kB
+
+DATAFILES (4 total):
+  peaks.xyz (Peaks):  VOLMAP_00001[peaks]
+  spam.out (Standard Data File):  SPAM:1 SPAM:2 SPAM:3 SPAM:4 ... SPAM:8 SPAM:9 SPAM:10 SPAM:11
+  SPAM_sum.out (Standard Data File):  SPAM[DG] SPAM[DH] SPAM[-TDS]
+  SPAM_info.out (SPAM info)
+
+RUN TIMING:
+TIME:		Init               : 0.0001 s (  0.00%)
+TIME:		Trajectory Process : 1.0434 s ( 99.88%)
+TIME:		Action Post        : 0.0004 s (  0.04%)
+TIME:		Analysis           : 0.0000 s (  0.00%)
+TIME:		Data File Write    : 0.0005 s (  0.05%)
+TIME:		Other              : 0.0002 s (  0.00%)
+TIME:	Run Total 1.0446 s
+---------- RUN END ---------------------------------------------------
+> traj
+trajin   trajout  
+> traj
+trajin   trajout  
+> trajout spam.dcd                                                                                        ################:输出align后的轨迹文件，方便pymol可视化水分子位置
+  [trajout spam.dcd]
+	Writing 'spam.dcd' as Charmm DCD
+> run
+  [run]
+---------- RUN BEGIN -------------------------------------------------
+
+PARAMETER FILES (1 total):
+ 0: SYS_gaff2.prmtop, 46769 atoms, 14318 res, box: Orthorhombic, 14013 mol, 13876 solvent
+
+INPUT TRAJECTORIES (1 total):
+ 0: 'prot_lig_prod_2.dcd' is a CHARMM DCD file (coords) Little Endian 32 bit, Parm SYS_gaff2.prmtop (Orthorhombic box) (reading 50 of 50)
+  Coordinate processing will occur on 50 frames.
+
+OUTPUT TRAJECTORIES (1 total):
+  'spam.dcd' (50 frames) is a CHARMM DCD file (coords) Little Endian 32 bit
+
+BEGIN TRAJECTORY PROCESSING:
+.....................................................
+ACTIVE OUTPUT TRAJECTORIES (1):
+  spam.dcd (coordinates, box)
+----- prot_lig_prod_2.dcd (1-50, 1) -----
+ 0% 10% 20% 31% 41% 51% 61% 71% 82% 92% 100% Complete.
+
+Read 50 frames and processed 50 frames.
+TIME: Avg. throughput= 748.2342 frames / second.
+
+ACTION OUTPUT:
+TIME: Analyses took 0.0000 seconds.
+
+DATASETS (17 total):
+	VOLMAP_00001 "VOLMAP_00001" (float grid), size is 7480 (29.952 kB)
+	VOLMAP_00001[peaks] "VOLMAP_00001[peaks]" (vector with scalar), size is 11 (0.275 kB)
+	VOLMAP_00001[totalvol] "VOLMAP_00001[totalvol]" (double), size is 1 (0.008 kB)
+	SPAM:1 "SPAM:1" (double), size is 50 (0.400 kB)
+	SPAM:2 "SPAM:2" (double), size is 50 (0.400 kB)
+	SPAM:3 "SPAM:3" (double), size is 50 (0.400 kB)
+	SPAM:4 "SPAM:4" (double), size is 50 (0.400 kB)
+	SPAM:5 "SPAM:5" (double), size is 50 (0.400 kB)
+	SPAM:6 "SPAM:6" (double), size is 50 (0.400 kB)
+	SPAM:7 "SPAM:7" (double), size is 50 (0.400 kB)
+	SPAM:8 "SPAM:8" (double), size is 50 (0.400 kB)
+	SPAM:9 "SPAM:9" (double), size is 50 (0.400 kB)
+	SPAM:10 "SPAM:10" (double), size is 50 (0.400 kB)
+	SPAM:11 "SPAM:11" (double), size is 50 (0.400 kB)
+	SPAM[DG] "SPAM[DG]" (X-Y mesh), size is 11 (0.176 kB)
+	SPAM[DH] "SPAM[DH]" (X-Y mesh), size is 11 (0.176 kB)
+	SPAM[-TDS] "SPAM[-TDS]" (X-Y mesh), size is 11 (0.176 kB)
+    Total data set memory usage is at least 35.163 kB
+
+DATAFILES (4 total):
+  peaks.xyz (Peaks):  VOLMAP_00001[peaks]
+  spam.out (Standard Data File):  SPAM:1 SPAM:2 SPAM:3 SPAM:4 ... SPAM:8 SPAM:9 SPAM:10 SPAM:11
+  SPAM_sum.out (Standard Data File):  SPAM[DG] SPAM[DH] SPAM[-TDS]
+  SPAM_info.out (SPAM info)
+
+RUN TIMING:
+TIME:		Init               : 0.0001 s (  0.16%)
+TIME:		Trajectory Process : 0.0668 s ( 99.41%)
+TIME:		Action Post        : 0.0000 s (  0.00%)
+TIME:		Analysis           : 0.0000 s (  0.00%)
+TIME:		Data File Write    : 0.0002 s (  0.35%)
+TIME:		Other              : 0.0001 s (  0.00%)
+TIME:	Run Total 0.0672 s
+---------- RUN END ---------------------------------------------------
+> 
+
+
+
+get_position                                                                                               ##############:选中想要的原子右击zoom，用该命令获得屏幕中心的坐标。
+pseudoatom 10, pos=[40.25813675,      46.65888977,      62.64922333]                                       ##############:在pymol中用该命令找peaks.xyz中水分子的位置，与SPAM_sum.out中能量一一对应。
+(autoDL) star@uprotech-server:/media/star/UProtech1/zhennan/RIPK2-0815/amber/RIPK2/TIES/FEP-240312$ cat /media/star/UProtech1/zhennan/RIPK2-0815/amber/RIPK2/POI-6hmx-240219/0219-2/peaks.xyz 
+11
+
+C      36.75813675      38.15888977      62.64922333       0.04401147
+C      36.75813675      40.65888977      57.64922333       0.04626177
+C      36.75813675      40.65888977      62.64922333       0.04497593
+C      36.75813675      42.15888977      60.64922333       0.05702020
+C      36.75813675      42.15888977      65.64922333       0.04161303
+C      37.75813675      38.65888977      65.64922333       0.04108739
+C      38.75813675      42.65888977      65.14922333       0.04694469
+C      39.25813675      39.65888977      63.14922333       0.05539328
+C      39.75813675      46.15888977      60.14922333       0.07304711
+C      40.25813675      46.65888977      62.64922333       0.05777573
+C      42.25813675      38.15888977      61.14922333       0.06123236
+
+
+
+(autoDL) star@uprotech-server:/media/star/UProtech1/zhennan/RIPK2-0815/amber/RIPK2/TIES/FEP-240312$ cat /media/star/UProtech1/zhennan/RIPK2-0815/amber/RIPK2/POI-6hmx-240219/0219-2/SPAM_sum.out 
+#Peak        SPAM[DG]     SPAM[DH]   SPAM[-TDS]
+   1.000      -3.0839      -0.2474      -2.8366
+   2.000      -2.7028       2.8801      -5.5828
+   3.000       3.4132       0.0332       3.3801
+   4.000     -14.0075       0.6910     -14.6985
+   5.000       6.8596       7.0030      -0.1434
+   6.000      -1.1611       2.9662      -4.1273
+   7.000       9.7588       2.4975       7.2613
+   8.000       1.5914       2.2047      -0.6132
+   9.000       2.5355       3.6695      -1.1340
+  10.000      11.1023       9.7985       1.3038
+  11.000      -0.3823       0.2462      -0.6285
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#############################################################################20240219_log##############################################################################
+#align the traj frist!
+#example at star@192.168.10.74:/media/star/UProtech1/zhennan/RIPK2-0815/amber/RIPK2/Ruler/U61
+#site information at peaks.xyz / energy information at SPAM_sum.out
+#pymol command: pseudoatiom water, pos=[x, y, z]
+#
+## 02/19/24 09:46:38
+# Args:  -p SYS_gaff2.prmtop -y prot_lig_prod_98.dcd
+# Loaded topologies:
+#   SYS_gaff2.prmtop
+volmap centermask :LIG 0.5 0.5 0.5 :WAT peakcut 0.05 peakfile peaks.xyz
+run
+# 02/19/24 09:57:08
+# Args:  -p SYS_gaff2.prmtop -y prot_lig_prod_98.dcd
+# Loaded topologies:
+#   SYS_gaff2.prmtop
+help spam
+spam peaks.xyz solv WAT reorder name SPAM info SPAM_info.out summary SPAM_sum.out out spam.out
+run
+quit
+

@@ -1,0 +1,161 @@
+#MMPBSA after analysis.py may error!!!
+source /usr/local/amber.sh
+
+mpirun -np 20 MMPBSA.py.MPI
+
+ante-MMPBSA.py  -p /content/drive/MyDrive/MD/CCR4/2022-10-11/SYS_gaff2.prmtop -c com.prmtop -r rec.prmtop -l ligand.prmtop -s :WAT:Na+:Cl-:Mg+:K+ -n :LIG --radii mbondi2
+MMPBSA.py -O -i mmpbsa.in -o FINAL_RESULTS_MMPBSA.dat -sp ../SYS_gaff2.prmtop -cp com.prmtop -rp rec.prmtop -lp ligand.prmtop -y ../prot_lig_prod*_whole.dcd
+
+#
+&general
+endframe= ,  interval= , strip_mask=:WAT:Na+:Cl-:Mg+:K+,
+&gb
+igb=2 , saltcon=0.15 ,
+&pb
+istrng=0.15 , inp=2, radiopt=0, prbrad=1.4,
+&decomp
+idecomp=2, dec_verbose=3,
+print_res="16-24, 35-37, 66-68, 82-89, 129-136, 153-154, 265"
+
+
+
+
+pdb4amber -i ligand_H.pdb -o ligand_h.pdb                                                     #格式美化
+antechamber -i ligand_h.pdb -fi pdb -o ligand.mol2 -fo mol2 -c bcc -nc 1 -rn LIG -at gaff2    #加电荷，-c电荷方法 -nc电荷数 -rn ligand在pdb中的resname -at atom type
+parmchk2 -i ligand.mol2 -f mol2 -o ligand.frcmod -s gaff2                                     #生成leap输入，force field modification
+
+#
+source leaprc.protein.ff19SB
+source leaprc.gaff2
+LIG = loadmol2 ligand.mol2
+loadamberparams ligand.frcmod
+saveoff LIG lig.lib
+savepdb LIG ligand_gaff.pdb
+quit
+
+tleap -f leap_lig.in
+
+
+
+pdbfixer 4w53.pdb --pdbid=4w53 --output=starting_end.pdb --keep-heterogens=none --add-residues --replace-nonstandard --add-atoms=none
+(yank)pdbfixer --pdbid=187L --keep-heterogens=none --add-atoms=heavy --ph=7.0 --replace-nonstandard --output=receptor.pdbfixer.pdb
+
+#if any HOH you want in protein.pdb, change the content about HOH like this:
+ATOM   2481  O   WAT   311     -59.528  19.181  -2.522  1.00  0.00           O
+
+
+cat starting_end.pdb ligand_gaff.pdb > protein_ligand.pdb   #no 'end' between ligand and protein in protein_ligand.pdb
+
+#
+source leaprc.protein.ff19SB
+source leaprc.DNA.OL15
+source leaprc.RNA.OL3
+source leaprc.GLYCAM_06j-1 
+source leaprc.gaff2
+source leaprc.lipid21
+source leaprc.water.tip3p
+loadamberparams ligand.frcmod                     #
+loadoff lig.lib                                   #小分子object file format
+SYS = loadpdb protein_ligand.pdb                  #定义SYS
+set SYS box { 94 104 98 }                         #不用amber溶剂化时，自带盒子的大小
+savepdb SYS SYS.pdb                               #最后的pdb
+saveamberparm SYS SYS_gaff2.prmtop SYS_gaff2.crd  #MD的输入文件，the topology and coordinate file
+quit
+
+tleap -f leap.in
+
+
+
+##################生成水盒子，加离子的话，需要两次leap
+source leaprc.protein.ff19SB
+source leaprc.DNA.OL15
+source leaprc.RNA.OL3
+source leaprc.GLYCAM_06j-1 
+source leaprc.gaff2
+source leaprc.water.tip3p 
+loadamberparams ligand.frcmod  
+loadoff lig.lib 
+SYS = loadpdb protein_ligand.pdb
+alignaxes SYS
+savepdb SYS SYS_nw.pdb 
+saveamberparm SYS SYS_nw.prmtop SYS_nw.crd
+solvatebox SYS TIP3PBOX 10 0.7
+saveamberparm SYS SYS_gaff2.prmtop SYS_gaff2.crd 
+savepdb SYS SYS.pdb
+quit
+#得到vol
+
+str(num_ion) = vol * (0.15/0.15) * 9.03 * 10 ^ 22 = (66)?
+
+#
+source leaprc.protein.ff19SB
+source leaprc.DNA.OL15
+source leaprc.RNA.OL3
+source leaprc.GLYCAM_06j-1 
+source leaprc.gaff2
+source leaprc.water.tip3p
+loadamberparams ligand.frcmod 
+loadoff lig.lib 
+SYS = loadpdb protein_ligand.pdb
+alignaxes SYS
+check SYS 
+charge SYS
+addions SYS Na+ 0 
+addions SYS Cl- 0
+check SYS
+charge SYS
+savepdb SYS SYS_nw.pdb
+saveamberparm SYS SYS_nw.prmtop SYS_nw.crd
+solvatebox SYS TIP3PBOX 10 0.7 
+addIonsRand SYS Na+ str(num_ion) Cl- str(num_ion) 
+saveamberparm SYS SYS_gaff2.prmtop SYS_gaff2.crd 
+savepdb SYS SYS.pdb
+quit
+
+tleap -f leap.in
+
+
+
+
+##prolif analysis.
+>>> import MDAnalysis as mda
+>>> import prolif as plf
+>>> import numpy as np
+>>> import os
+>>> from prolif.plotting.network import LigNetwork
+
+
+>>> u = mda.Universe('SYS_gaff2.prmtop', 'prot_lig_prod_2.dcd')
+
+>>> lig = u.select_atoms('resname LIG')
+>>> prot = u.select_atoms('protein')
+>>> lmol = plf.Molecule.from_mda(lig)
+>>> pmol = plf.Molecule.from_mda(protein)
+
+>>> fp = plf.Fingerprint()
+>>> fp
+<prolif.fingerprint.Fingerprint: 9 interactions: ['Hydrophobic', 'HBAcceptor', 'HBDonor', 'Cationic', 'Anionic', 'CationPi', 'PiCation', 'PiStacking', 'VdWContact'] at 0x7fcde07c9e20>
+
+>>> fp.run(u.trajectory[::5], lig, prot)
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:21<00:00,  2.18s/it]
+<prolif.fingerprint.Fingerprint: 9 interactions: ['Hydrophobic', 'HBAcceptor', 'HBDonor', 'Cationic', 'Anionic', 'CationPi', 'PiCation', 'PiStacking', 'VdWContact'] at 0x7fcde07c9e20>
+>>> df = fp.to_dataframe()
+>>> df
+ligand           LIG307                                                                                  ...                                                                                           
+protein           LEU20                  VAL28                  ALA41                  LYS43             ...     GLU101      LEU149                 ALA159                 ASP160                      
+interaction Hydrophobic VdWContact Hydrophobic VdWContact Hydrophobic VdWContact Hydrophobic HBAcceptor  ... VdWContact Hydrophobic VdWContact Hydrophobic VdWContact Hydrophobic HBAcceptor VdWContact
+Frame                                                                                                    ...                                                                                           
+0                  True      False        True       True        True       True        True      False  ...      False        True       True        True       True       False       True       True
+5                 False      False        True       True        True      False        True      False  ...      False        True      False        True      False        True      False       True
+10                 True      False        True       True        True      False        True      False  ...      False        True       True        True       True       False       True       True
+15                 True      False        True      False        True      False        True      False  ...      False        True       True        True       True       False       True       True
+20                False      False        True       True        True       True        True      False  ...      False        True      False        True       True       False       True       True
+25                False       True        True       True        True      False        True      False  ...      False        True      False        True      False        True       True       True
+30                False       True        True       True        True       True        True      False  ...      False        True       True        True      False       False       True       True
+35                False      False        True      False        True      False        True       True  ...      False        True      False        True      False        True       True       True
+40                 True       True        True       True        True      False        True       True  ...       True        True      False        True       True       False       True       True
+45                False      False        True       True        True      False        True       True  ...      False        True       True        True       True       False       True       True
+
+[10 rows x 33 columns]
+>>> fp.plot_lignetwork(lmol)
+<IPython.core.display.HTML object>
