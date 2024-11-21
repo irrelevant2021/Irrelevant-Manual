@@ -860,6 +860,7 @@ raw_data.to_csv(os.path.join(workDir, Output_name + ".csv"))
 
 #@title **Fingerprint (without water)**
 
+import prolif as plf
 from prolif.plotting.network import LigNetwork
 
 u = mda.Universe('SYS_nw.prmtop', 'prot_lig_prod1-2_nw.dcd') #mod
