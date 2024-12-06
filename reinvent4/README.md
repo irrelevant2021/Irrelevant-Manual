@@ -4,7 +4,7 @@ Install maize. https://github.com/MolecularAI/REINVENT4
 
 # TL:  
 At 'smi', dwnload csv file from ChemBL, then get compounds.smi and validation_compounds.smi by   
-`df[['Smiles', 'pChEMBL Value', 'Molecule ChEMBL ID']].to_csv('temp.csv', header=None, index=False, sep='\t')`    
+`df['Smiles'].to_csv('temp.csv', header=None, index=False, sep='\t')`    
 `sed -i '/\./d' temp.csv` #reinvnet do not recognize salt   
 `shuf -n 10 temp.csv > validation_compounds.smi`  
 `grep -v -F -f validation_compounds.smi temp.csv > compounds.smi`    
