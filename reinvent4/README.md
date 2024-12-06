@@ -1,6 +1,7 @@
 # Install
 Install reinvent4. https://github.com/MolecularAI/REINVENT4 # some big package in requirements-linux-64-2.lock using `pip install <package_name> -i https://pypi.tuna.tsinghua.edu.cn/simple` or download by vpn before pip install.  
-Install maize. https://github.com/MolecularAI/REINVENT4 
+Install maize. https://github.com/MolecularAI/REINVENT4   
+install gnina. https://github.com/gnina/gnina
 
 # TL:  
 At 'smi', dwnload csv file from ChemBL, then get compounds.smi and validation_compounds.smi by   
@@ -16,4 +17,4 @@ At 'TL',  run `reinvent transfer_learning.toml` , and check running state by `te
   
 # RL:  
 (change py)   
-At 'maize-RL'
+At 'maize-RL', 
