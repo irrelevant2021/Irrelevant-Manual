@@ -16,5 +16,18 @@ At 'TL',  run `reinvent transfer_learning.toml` , and check running state by `te
 #I would choose the lowest point of loss_Validation Loss   
   
 # RL:  
-(change py)   
-At 'maize-RL', 
+
+At 'maize-RL', run `reinvent staged_learning.toml` , and check running state by `tensorboard --bind_all --logdir tb_logs_0`  
+#staged_learning.toml-[$PATH_to_executable/maize, gnina.yml, maize.toml];  
+#gnina.yml-[config of maize for gnina];  
+#maize.toml-[$PATH_to_executable/gnina, $PATH_to_executable/temp]  
+#receptor.pdb should be changed to your file, and search_center should be changed to your number in gnina.yml  
+#PRIMARY_SCORE_TAG = "minimizedAffinity" should be changed to "CNNscore" in $YOUR_CONDA_PATH/envs/maize/lib/python3.10/site-packages/maize/steps/mai/docking/gnina.py    
+
+filter.* for deal with the results of RL.  
+`python filter.py` to get top molecules' smiles  
+`bash filter.sh` to find their docking pose  
+#filter_sdf.txt in filter.sh is from Sublime after grep  
+
+
+### By this way, generating a batch of pose-realistically predictable ligands, which go through a series of screenings(MW, logP, SAcore et al.), in the target binding pocket, now evaluate them with MM/GBSA!
