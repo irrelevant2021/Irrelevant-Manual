@@ -1,0 +1,174 @@
+## this file shows and example of most scoring components available
+## with appropratie transforms
+#version = 4
+run_type = "scoring"
+json_out_config = "scoring_config.json"
+
+[parameters]
+smiles_file = "ref.smi"
+output_csv = "ref_scoring.csv"
+
+[scoring]
+type = "geometric_mean"
+
+[[scoring.component]]
+[scoring.component.QED]
+[[scoring.component.QED.endpoint]]
+name = "QED"
+weight = 0.3
+
+[[scoring.component]]
+[scoring.component.Maize]
+[[scoring.component.Maize.endpoint]]
+name = "docking with MAIZE"
+weight = 0.7
+params.executable = "/root/miniconda3/envs/maize/bin/maize"
+params.workflow = "gnina.yml"
+params.config = "maize.toml"
+params.log = "maize_worfklow_docking.log"
+#PRIMARY_SCORE_TAG = "minimizedAffinity" has been changed to "CNNscore" in /home/zhennanfong/mambaforge/envs/maize/lib/python3.10/site-packages/maize/steps/mai/docking/gnina.py
+#transform.type = "reverse_sigmoid"
+#transform.high = -6
+#transform.low = -13.5
+#transform.k = 0.2
+
+[[scoring.component]]
+# Custom alerts if a filter of unwanted groups
+[scoring.component.custom_alerts]
+[[scoring.component.custom_alerts.endpoint]]
+name = "Alerts"  # user chosen name for output
+# no weight because as a filter it will be applied globally
+params.smarts = [
+    "[*;r8]",
+    "[*;r9]",
+    "[*;r10]",
+    "[*;r11]",
+    "[*;r12]",
+    "[*;r13]",
+    "[*;r14]",
+    "[*;r15]",
+    "[*;r16]",
+    "[*;r17]",
+    "[#8][#8]",
+    "[#6;+]",
+    "[#16][#16]",
+    "[#7;!n][S;!$(S(=O)=O)]",
+    "[#7;!n][#7;!n]",
+    "C#C",
+    "C(=[O,S])[O,S]",
+    "[#7;!n][C;!$(C(=[O,N])[N,O])][#16;!s]",
+    "[#7;!n][C;!$(C(=[O,N])[N,O])][#7;!n]",
+    "[#7;!n][C;!$(C(=[O,N])[N,O])][#8;!o]",
+    "[#8;!o][C;!$(C(=[O,N])[N,O])][#16;!s]",
+    "[#8;!o][C;!$(C(=[O,N])[N,O])][#8;!o]",
+    "[#16;!s][C;!$(C(=[O,N])[N,O])][#16;!s]",
+#custom by zhennan
+    "[NH2]",
+    "[OH]"
+]
+
+[[scoring.component]]
+[scoring.component.MolecularWeight]
+[[scoring.component.MolecularWeight.endpoint]]
+name = "MW"
+#weight = 0.25
+# transforms can be used for any component if desired
+transform.type = "double_sigmoid"
+transform.high = 500.0
+transform.low = 200.0
+transform.coef_div = 500.0
+transform.coef_si = 20.0
+transform.coef_se = 20.0
+
+[[scoring.component]]
+[scoring.component.SlogP]
+[[scoring.component.SlogP.endpoint]]
+name = "SlogP (RDKit)"
+weight = 0
+transform.type = "reverse_sigmoid"
+transform.high = 3
+transform.low = 1
+transform.k = 0.5
+
+[[scoring.component]]
+[scoring.component.TPSA]
+[[scoring.component.TPSA.endpoint]]
+name = "TPSA"
+weight = 0
+transform.type = "double_sigmoid"
+transform.high = 140.0
+transform.low = 0.0
+transform.coef_div = 140.0
+transform.coef_si = 20.0
+transform.coef_se = 20.0
+
+[[scoring.component]]
+[scoring.component.NumAtomStereoCenters]
+[[scoring.component.NumAtomStereoCenters.endpoint]]
+name = "Number of stereo centers"
+weight = 0
+transform.type = "step"
+transform.high = 3
+transform.low = 0
+
+[[scoring.component]]
+[scoring.component.HBondAcceptors]
+[[scoring.component.HBondAcceptors.endpoint]]
+name = "Number of HB acceptors (Lipinski)"
+weight = 0
+transform.type = "reverse_sigmoid"
+transform.high = 10
+transform.low = 8
+transform.k = 0.5
+
+[[scoring.component]]
+[scoring.component.HBondDonors]
+[[scoring.component.HBondDonors.endpoint]]
+name = "Number of HB donors (Lipinski)"
+weight = 0
+transform.type = "reverse_sigmoid"
+transform.high = 4
+transform.low = 0
+transform.k = 0.5
+
+[[scoring.component]]
+[scoring.component.NumRotBond]
+[[scoring.component.NumRotBond.endpoint]]
+name = "Number of rotatable bonds"
+weight = 0
+transform.type = "reverse_sigmoid"
+transform.high = 20
+transform.low = 0
+transform.k = 0.5
+
+[[scoring.component]]
+[scoring.component.NumHeavyAtoms]
+[[scoring.component.NumHeavyAtoms.endpoint]]
+name = "Number of Heavy atoms"
+weight = 0
+transform.type = "reverse_sigmoid"
+transform.high = 80
+transform.low = 20
+transform.k = 0.5
+
+[[scoring.component]]
+[scoring.component.MolVolume]
+[[scoring.component.MolVolume.endpoint]]
+name = "Moleculer Volume (RDKit)"
+weight = 0
+transform.type = "reverse_sigmoid"
+transform.high = 600
+transform.low = 300
+transform.k = 0.5
+
+# Scoring components about drug-likeness, synthesizability & reactions:
+# (raw) molecule synthetic accessibility as a score between 1 (easy to make) and 10 (very difficult to make)
+[[scoring.component]]
+[scoring.component.SAScore]
+[[scoring.component.SAScore.endpoint]]
+name = "SA score"
+weight = 0
+transform.type = "reverse_sigmoid"
+transform.high = 10
+transform.low = 0
+transform.k = 0.5
