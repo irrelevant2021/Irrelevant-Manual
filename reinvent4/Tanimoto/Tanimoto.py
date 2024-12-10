@@ -1,5 +1,6 @@
 # Compare molecular similarity with Tanimoto to predict the likelihood of off-target.
 # This script establishes a pathway for each molecule you pick out to compare with the active molecule from ChemBL.
+# ChemBL683052.smi is too big to upload (copy at autoDL).
 import os
 import shutil
 import pandas as pd
