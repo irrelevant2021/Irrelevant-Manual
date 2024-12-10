@@ -1,0 +1,27 @@
+## this file shows and example of most scoring components available
+## with appropratie transforms
+#version = 4
+run_type = "scoring"
+json_out_config = "scoring_config.json"
+
+[parameters]
+smiles_file = "../ChemBL683052.smi"
+output_csv = "Tanimoto.csv"
+
+[scoring]
+type = "geometric_mean"
+
+[[scoring.component]]
+[scoring.component.TanimotoDistance]
+
+[[scoring.component.TanimotoDistance.endpoint]]
+name = "Tanimoto similarity ECF6"
+weight = 1
+
+# component specific parameters
+params.smiles = [
+    "SMILES_EDIT"
+]
+params.radius = 3
+params.use_counts = true
+params.use_features = true
