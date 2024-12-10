@@ -30,5 +30,5 @@ for index, row in df.iterrows():
     with open(file_path, 'w') as file:
         file.write(content)
 
-# bash command to run:
+# bash command to run(this will take lots of memory):
 # for i in $(ls -d ./*/);do echo $i;cd $i;reinvent scoring_components_example.toml > /dev/null 2>&1 & cd ..;done
