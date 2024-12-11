@@ -1,6 +1,5 @@
 &general
-# startframe=400, endframe=500, interval=5,
- strip_mask=:WAT:Na+:Cl-:Mg+:K+,
+ startframe=31, endframe=50, interval=4, strip_mask=:WAT:Na+:Cl-:Mg+:K+,
 /
 &gb
  igb=2, saltcon=0.15,
