@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ScriptPath='../../../amber_scripts/'
+ScriptPath='/root/autodl-tmp/amber/amber_scripts/'
 WorkPath='\/root\/autodl-tmp\/amber\/PROTEIN_ID\/LIGANDS_ID'
 
 for file in $(ls *.pdb | grep -E 'CHEMBL5172982|CHEMBL5175396|CHEMBL5185309|CHEMBL5187179|CHEMBL5189173|CHEMBL5191796|CHEMBL5204246|CHEMBL5205764|CHEMBL5206121')
