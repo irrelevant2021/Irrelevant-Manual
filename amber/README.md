@@ -1,3 +1,11 @@
-使用amber进分子行动力学模拟，该部分主要代码参考https://github.com/pablo-arantes/making-it-rain 添加了批量分子运行，并自定义分析。  
+THANKS TOhttps://github.com/irrelevant2021/mol-pot/tree/main/amber `Arantes P.R., Depólo Polêto M., Pedebos C., Ligabue-Braun R. Making it rain: cloud-based molecular simulations for everyone. Journal of Chemical Information and Modeling 2021. DOI: 10.1021/acs.jcim.1c00998.`
 
-使用方法：
+## amber  
+### amber_scripts  
+all scripts put here, copy them to your working_dir for MD
+### PROTEIN_ID  
+protein.pdb #your protein file, after `pdbfixer your_protein.pdb --output=protein.pdb --keep-heterogens=none --add-residues --replace-nonstandard --add-atoms=none`;  
+
+LIGANDS_ID #including mult-your_ligands.pdb, here is working_dir, start MD with `cp ../../amber_scripts/123.sh .; bash 123.sh`
+
+## note
