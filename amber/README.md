@@ -10,5 +10,6 @@ LIGANDS_ID #including mult-your_ligands.pdb, here is working_dir, start MD with 
 
 
 ## note  
-1.check your version of cuda, `nvcc -V`, before`conda install -c conda-forge openmm cudatoolkit=1x.x` would be useful!  
-2.you can change your MD parameters at 123.sh(mainly), mmgbsa.in and MD_amber_openmm.py.
+1. `conda install mamba -c conda-forge`, mamba is great!  
+2. check your version of cuda, `nvcc -V`, before`conda install -c conda-forge openmm cudatoolkit=1x.x` would be useful!  
+3. you can change your MD parameters at 123.sh(mainly), mmgbsa.in and MD_amber_openmm.py.
