@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ScriptPath='/media/star/UProtech1/zhennan/amber_scripts/'
-WorkPath='\/media\/star\/UProtech1\/zhennan\/RIPK2-0815\/amber\/RIPK2\/CHEMBL5136571'
+ScriptPath='../../../amber_scripts/'
+WorkPath='\/root\/autodl-tmp\/amber\/PROTEIN_ID\/LIGANDS_ID'
 
 for file in $(ls *.pdb | grep -E 'CHEMBL5172982|CHEMBL5175396|CHEMBL5185309|CHEMBL5187179|CHEMBL5189173|CHEMBL5191796|CHEMBL5204246|CHEMBL5205764|CHEMBL5206121')
 do
@@ -61,7 +61,8 @@ do
         cp $ScriptPath/mmgbsa.in .
 	cp $ScriptPath/decom.py .
         ante-MMPBSA.py  -p ../SYS_gaff2.prmtop -c com.prmtop -r rec.prmtop -l ligand.prmtop -s :WAT:Na+:Cl-:Mg+:K+ -n :LIG --radii mbondi2
-        mpirun -np 50 MMPBSA.py.MPI -O -i mmgbsa.in -o FINAL_RESULTS_MMGBSA.dat -sp ../SYS_gaff2.prmtop -cp com.prmtop -rp rec.prmtop -lp ligand.prmtop -y ../prot_lig_prod_2.dcd
+	MMPBSA.py -O -i mmgbsa.in -o FINAL_RESULTS_MMGBSA.dat -sp ../SYS_gaff2.prmtop -cp com.prmtop -rp rec.prmtop -lp ligand.prmtop -y ../prot_lig_prod_2.dcd
+#        mpirun -np 50 MMPBSA.py.MPI -O -i mmgbsa.in -o FINAL_RESULTS_MMGBSA.dat -sp ../SYS_gaff2.prmtop -cp com.prmtop -rp rec.prmtop -lp ligand.prmtop -y ../prot_lig_prod_2.dcd
         result=$(grep 'DELTA TOTAL' FINAL_RESULTS_MMGBSA.dat | awk '{print $3}')
         rms=$(awk -F ',' '{sum += $2} END {print sum/NR}' ../rmsd_lig.csv)
         echo -e "$dir,\c" >> ../../mmpbsa_result.csv
