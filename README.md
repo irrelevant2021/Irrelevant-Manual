@@ -1,3 +1,7 @@
-# mol-pot
+# Irrelevant-Manual  
 
-记录一些方便工作的零散脚本，就像一个罐子，从里头使劲掏出几个分子。
+Things I do at working:  
+
+## reinvent  
+
+## amber
