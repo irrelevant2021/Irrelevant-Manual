@@ -1,7 +1,7 @@
 from sys import stdout, exit, stderr
 import os, math, fnmatch
 import sys
-sys.path.append('/home/star/enter/envs/autoDL/lib/python3.8/site-packages')
+sys.path.append('/root/miniconda3/lib/python3.10/site-packages')
 
 import openmm as mm
 from openmm import *
