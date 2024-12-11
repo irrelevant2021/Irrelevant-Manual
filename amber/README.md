@@ -6,6 +6,9 @@ all scripts put here, copy them to your working_dir for MD
 ### PROTEIN_ID  
 protein.pdb #your protein file, after `pdbfixer your_protein.pdb --output=protein.pdb --keep-heterogens=none --add-residues --replace-nonstandard --add-atoms=none`;  
 
-LIGANDS_ID #including mult-your_ligands.pdb, here is working_dir, start MD with `cp ../../amber_scripts/123.sh .; bash 123.sh`
+LIGANDS_ID #including mult-your_ligands.pdb, here is working_dir, start MD with `cp ../../amber_scripts/123.sh .; bash 123.sh`  
 
-## note
+
+## note  
+1.check your version of cuda, `nvcc -V`, before`conda install -c conda-forge openmm cudatoolkit=1x.x` would be useful!  
+2.you can change your MD parameters at 123.sh(mainly), mmgbsa.in and MD_amber_openmm.py.
