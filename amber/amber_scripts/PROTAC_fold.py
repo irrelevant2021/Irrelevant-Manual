@@ -1,3 +1,4 @@
+#类聚轨迹文件，分析主要构象
 import argparse
 import pandas as pd
 import pytraj as pt
