@@ -31,4 +31,6 @@ for index, row in df.iterrows():
         file.write(content)
 
 # bash command to run(this will take lots of memory):
-# for i in $(ls -d ./*/);do echo $i;cd $i;reinvent scoring_components_example.toml > /dev/null 2>&1 & cd ..;done
+# for i in $(ls -d ./*/);do echo $i;cd $i;reinvent scoring_components_example.toml > /dev/null 2>&1 & cd ..;done  
+# for i in $(ls -d ./*/);do echo $i;cd $i;cp ../sort.py .;python sort.py; cd ..;done  
+# head -n 2 ./*/Tanimoto.csv  
