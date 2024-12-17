@@ -33,7 +33,7 @@ filter.* for deal with the results of RL.
 ### By this way, generating a batch of pose-realistically predictable ligands, which go through a series of screenings(MW, logP, SAcore et al.), in the target binding pocket, now evaluate them with MM/GBSA!  
 
 ## note  
-cuda in conda is dfferent with /usr/local/cuda-x(install by .run file, which should set environment variables by yourself), while gnina seems have to use cuda in /usr/local/cuda-x. I still haven't figured out the relationship between their adaptations, and here are some commands I used:  
+cuda in conda(auto) is dfferent with /usr/local/cuda-x(install by .run file, which should set environment variables by yourself), while gnina seems have to use cuda in /usr/local/cuda-x. I still haven't figured out the relationship between their adaptations, and here are some commands I used:  
 remove them  
 `sudo apt-get --purge remove "*cublas*" "*cudnn*" "*cuda*"` or run cuda-uninstaller in /usr/local/cuda-12.0/bin (installed by .run file)  
 `sudo apt-get remove --purge '^nvidia-.*'`  
