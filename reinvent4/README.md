@@ -34,14 +34,13 @@ filter.* for deal with the results of RL.
 
 ## note  
 cuda in conda(auto) is dfferent with /usr/local/cuda-x(install by .run file, which should set environment variables by yourself), while gnina seems have to use cuda in /usr/local/cuda-x. I still haven't figured out the relationship between their adaptations, and here are some commands I used:  
-remove them  
-`sudo apt-get --purge remove "*cublas*" "*cudnn*" "*cuda*"` or run cuda-uninstaller in /usr/local/cuda-12.0/bin (installed by .run file)  
-`sudo apt-get remove --purge '^nvidia-.*'`  
-`sudo apt-get autoremove`  
-install them  
-from ubuntu software updater and https://developer.nvidia.com/cuda-toolkit (don't chose driver at cuda installtion, because it has been have installed)   
-set environment variables   
+1. install cuda with .run file at /usr/local/cuda-x from https://developer.nvidia.com/cuda-toolkit (don't chose driver at cuda installtion, because it has been have installed)   
+2. set environment variables temporarily, ONLY at reinvnet4! It affects the variables of CUDA in other environments!!!   
 `export LD_LIBRARY_PATH=/usr/local/cuda-x/lib64:$LD_LIBRARY_PATH`   
-#`export PATH=/usr/local/cuda-x/bin:$PATH`  
-#`export CUDA_HOME=/usr/local/cuda-x`
 
+3. others:  
+  remove them  
+  `sudo apt-get --purge remove "*cublas*" "*cudnn*" "*cuda*"` or run cuda-uninstaller in /usr/local/cuda-12.0/bin (installed by .run file)  
+  `sudo apt-get remove --purge '^nvidia-.*'`  
+  `sudo apt-get autoremove`  
+  install NVIDIA driver from ubuntu software updater is good. 
