@@ -13,14 +13,3 @@ LIGANDS_ID #including mult-your_ligands.pdb, here is working_dir, start MD with 
 1. `conda install mamba -c conda-forge`, mamba is great!  
 2. you can change your MD parameters at 123.sh(mainly), mmgbsa.in and MD_amber_openmm.py.  
 3. check your version of `nvidia-smi` and `nvcc -V`, before`conda install -c conda-forge openmm cudatoolkit=1x.x` would be useful!  
-IF unlucky to get `python -m openmm.testInstallation` failed with cuda:  
-remove them  
-`sudo apt-get --purge remove "*cublas*" "*cudnn*" "*cuda*"` or run cuda-uninstaller in /usr/local/cuda-12.0/bin (installed by .run file)  
-`sudo apt-get remove --purge '^nvidia-.*'`  
-`sudo apt-get autoremove`  
-install them  
-from https://www.nvidia.cn/drivers/lookup/ and https://developer.nvidia.com/cuda-toolkit (don't chose driver at cuda installtion, because it has been have installed)  
-set environment variables  
-`export LD_LIBRARY_PATH=/usr/local/cuda-12.0/lib64:$LD_LIBRARY_PATH`
-`export PATH=/usr/local/cuda-12.0/bin:$PATH`
-`export CUDA_HOME=/usr/local/cuda-12.0`
