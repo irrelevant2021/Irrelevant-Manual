@@ -39,7 +39,7 @@ remove them
 `sudo apt-get remove --purge '^nvidia-.*'`  
 `sudo apt-get autoremove`  
 install them  
-from https://www.nvidia.cn/drivers/lookup/ and https://developer.nvidia.com/cuda-toolkit (don't chose driver at cuda installtion, because it has been have installed)   
+from ubuntu software updater and https://developer.nvidia.com/cuda-toolkit (don't chose driver at cuda installtion, because it has been have installed)   
 set environment variables   
 `export LD_LIBRARY_PATH=/usr/local/cuda-x/lib64:$LD_LIBRARY_PATH`   
 #`export PATH=/usr/local/cuda-x/bin:$PATH`  
