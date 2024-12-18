@@ -229,7 +229,7 @@ if inpcrd.boxVectors is not None:
     simulation.context.setPeriodicBoxVectors(*inpcrd.boxVectors)
 
 print("\t- Energy minimization: " + str(Minimization_steps) + " steps")
-simulation.minimizeEnergy(maxIterations=int(Minimization_steps))
+simulation.minimizeEnergy(tolerance=10*kilojoule/mole/nanometer, maxIterations=int(Minimization_steps))
 #simulation.minimizeEnergy(tolerance=10*kilojoule/mole, maxIterations=int(Minimization_steps))
 print("\t-> Potential Energy = " + str(simulation.context.getState(getEnergy=True).getPotentialEnergy()))
 
