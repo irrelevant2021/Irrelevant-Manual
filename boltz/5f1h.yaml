@@ -1,0 +1,8 @@
+ersion: 1  # Optional, defaults to 1
+sequences:
+  - protein:
+      id: [A]
+      sequence: SMLKLSAENESTPIQQLLEHFLRQLQRKDPHGFFAFPVTDAIAPGYSMIIKHPMDFGTMKDKIVANEYKSVTEFKADFKLMCDNAMTYNRPDTVYYKLAKKILHAGFKMMSKERLLALKRSMS
+  - ligand:
+      id: [E]
+      smiles: CN1C=C(c2ccncc2C1=O)c3cc(c(cc3OC)CN(C)C)OC
