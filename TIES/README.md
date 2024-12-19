@@ -14,7 +14,7 @@ modify running time et al. see mod.sh
 ## run  
 `ties_md --config_file=./ties/ties-ligand1-ligand2/com/TIES.cfg`   
 `ties_md --config_file=./ties/ties-ligand1-ligand2/lig/TIES.cfg`   
-change your filename, watch the progress at 'ties/ties-GSK843-IN05019/XXX/LAMBDA_X.XX/repX/X/state_X.log'  
+change your filename, watch the progress at 'ties/ties-GSK843-IN05019/XXX/LAMBDA_X.XX/repX/X/X.log'  
 
 ## analysis  
 `ties_ana --run_type=setup`   
