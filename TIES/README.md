@@ -18,5 +18,5 @@ change your filename, watch the progress at 'ties/ties-GSK843-IN05019/XXX/LAMBDA
 
 ## analysis  
 `ties_ana --run_type=setup`   
-wirte 'legs = com, lig' in analysis.cfg, then  
+write 'legs = com, lig' in analysis.cfg, and chose the pairs of ligands in exp.dat,then  
 `ties_ana`  
