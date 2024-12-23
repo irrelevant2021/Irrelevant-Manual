@@ -39,8 +39,8 @@ purge_memories = false  # if true purge all diversity filter memories after each
 #smiles_file = "warheads.smi"  # 2 warheads per line separated with '|'
 
 ## Mol2Mol
-prior_file = "/home/zhennanfong/REINVENT4-4.5.11/priors/mol2mol_medium_similarity.prior"
-agent_file = "/home/zhennanfong/REINVENT4-4.5.11/priors/mol2mol_medium_similarity.prior"
+prior_file = "/root/REINVENT4-4.5.11/priors/mol2mol_medium_similarity.prior"
+agent_file = "/root/REINVENT4-4.5.11/priors/mol2mol_medium_similarity.prior"
 smiles_file = "16.smi"  # 1 compound per line
 sample_strategy = "multinomial"  # multinomial or beamsearch (deterministic)
 distance_threshold = 100
@@ -118,7 +118,7 @@ weight = 0.2
 [[stage.scoring.component.Maize.endpoint]]
 name = "docking with MAIZE"
 weight = 0.3
-params.executable = "/home/zhennanfong/mambaforge/envs/maize/bin/maize"
+params.executable = "/root/miniconda3/envs/maize/bin/maize"
 params.workflow = "gnina.yml"
 params.config = "maize.toml"
 params.log = "maize_worfklow_docking.log"
