@@ -23,6 +23,7 @@ At 'maize-RL', run `reinvent staged_learning.toml` , and check running state by 
 #maize.toml-[$PATH_to_executable/gnina, $PATH_to_executable/temp]  
 #receptor.pdb should be changed to your file, and search_center should be changed to your number in gnina.yml  
 #PRIMARY_SCORE_TAG = "minimizedAffinity" should be changed to "CNNscore" in $YOUR_CONDA_PATH/envs/maize/lib/python3.10/site-packages/maize/steps/mai/docking/gnina.py    
+#[CNN_VS is CNNaffinity*CNN_score; CNNaffinity is a binding affinity prediction in pK units (e.g. 9 is 1 nM); CNNscore is a predicted probability that the pose is good (<2A from correct); minimizedAffinity is the Vina score]  
 
 filter.* for deal with the results of RL.  
 `python filter.py` to get top molecules' smiles  
