@@ -1,7 +1,8 @@
 # Install
 Install reinvent4. https://github.com/MolecularAI/REINVENT4 # some big package in requirements-linux-64-2.lock using `pip install <package_name> -i https://pypi.tuna.tsinghua.edu.cn/simple` or download by vpn before pip install.  
 Install maize. https://github.com/MolecularAI/REINVENT4   
-install gnina. https://github.com/gnina/gnina
+install gnina. https://github.com/gnina/gnina  
+install QSARtuna. https://github.com/MolecularAI/QSARtuna
 
 # TL:  
 At 'smi', dwnload csv file from ChemBL, then get compounds.smi and validation_compounds.smi by   
@@ -31,7 +32,8 @@ filter.* for deal with the results of RL.
 #filter_sdf.txt in filter.sh is from Sublime after grep  
 
 
-### By this way, generating a batch of pose-realistically predictable ligands, which go through a series of screenings(MW, logP, SAcore et al.), in the target binding pocket, now evaluate them with MM/GBSA!  
+#### By this way, generating a batch of pose-realistically predictable ligands, which go through a series of screenings(MW, logP, SAcore et al.), in the target binding pocket.   
+#### Base on this, larger molecules are developed(Tanimoto), or molecules with stronger affinity(MM/GBSA-QSARtuna), and so on.  
 
 ## note  
 cuda in conda(auto) is dfferent with /usr/local/cuda-x(install by .run file, which should set environment variables by yourself), while gnina seems have to use cuda in /usr/local/cuda-x. I still haven't figured out the relationship between their adaptations, and here are some commands I used:  
