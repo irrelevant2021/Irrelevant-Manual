@@ -92,7 +92,7 @@ penalty_multiplier = 0.5         # penalty factor for PenalizeSameSmiles
 chkpt_file = 'test1.chkpt'  # name of the checkpoint file, can be reused as agent
 
 termination = "simple"  # termination criterion fot this stage
-max_score = 0.6  # terminate if this total score is exceeded
+max_score = 0.8  # terminate if this total score is exceeded
 min_steps = 25  # run for at least this number of steps
 max_steps = 100  # terminate entire run when exceeded
 
@@ -289,4 +289,4 @@ params.args = "run --no-capture-output -p /home/zhennanfong/anaconda3/envs/qsar 
 transform.type = "reverse_sigmoid"
 transform.high = 0
 transform.low = -50
-transform.k = 0.4
+transform.k = 0.5
