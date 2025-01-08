@@ -1,4 +1,4 @@
-THANKS TOhttps://github.com/irrelevant2021/mol-pot/tree/main/amber `Arantes P.R., Depólo Polêto M., Pedebos C., Ligabue-Braun R. Making it rain: cloud-based molecular simulations for everyone. Journal of Chemical Information and Modeling 2021. DOI: 10.1021/acs.jcim.1c00998.`
+THANKS TO https://github.com/pablo-arantes/making-it-rain `Arantes P.R., Depólo Polêto M., Pedebos C., Ligabue-Braun R. Making it rain: cloud-based molecular simulations for everyone. Journal of Chemical Information and Modeling 2021. DOI: 10.1021/acs.jcim.1c00998.`
 
 ## amber  
 ### amber_scripts  
