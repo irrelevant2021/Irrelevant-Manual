@@ -5,7 +5,7 @@ run_type = "scoring"
 json_out_config = "scoring_config.json"
 
 [parameters]
-smiles_file = "../ChemBL683052.smi"
+smiles_file = "../ChemBL_ITK.smi"
 output_csv = "Tanimoto.csv"
 
 [scoring]
