@@ -16,7 +16,7 @@ bash 1.sh #awk '{print substr($1,1,13)","substr($1,14,13)","substr($1,27,13)","s
 bash 2.sh #align  
 #Fully_Enumerated_Structures(3.sh)还未测试, 没找到Fully_Enumerated_Structures的align ref  
 
-## Recount_250114中更新了统计方法:  
+### Recount_250114中更新了统计方法:  
 
 使用smiles来count，因为库设计时，相同的基团可能在不同的子库中有不同的name;  
 添加了绝对命中和相对命中的统计方式;  
