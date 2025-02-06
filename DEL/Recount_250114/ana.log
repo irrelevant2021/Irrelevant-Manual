@@ -1,0 +1,101 @@
+B1, how many kinds of molecules hit after merged, exp1, and exp2
+(83804, 3) (83974, 2) (83993, 2)
+B2, how many kinds of molecules hit after merged, exp1, and exp2
+(56162, 3) (56261, 2) (56296, 2)
+between experiments, top 50 HitIndex of B1 has p-value:
+0.3483643323940264
+between experiments, top 50 HitIndex of B2 has p-value:
+1.1473549230531249e-10
+以上, 平行实验之间是否有显著差异(top50)?
+   
+Total number of B1 hits:
+(211538, 14)
+Total number of B2 hits:
+(160747, 14)
+Total number of B1 - B2 hits:
+(208256, 14)
+the R1 smiles hits number / the average of R1 smlies hits, or named Feature Intensity:
+                                             r1_smiles  r1HitCount
+184        O=C1C2=C(C=CC(N3CCC(C=O)C3)=C2)CN1CCCC(O)=O    1.980735
+97               OC(CCC(C=C1)=CC=C1C2=CN=C(C=O)C=C2)=O    1.917496
+49               O=C(O)CCC1=CC=CC(C2=CN=C(C=O)C=C2)=C1    1.775603
+15   O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...    1.522213
+132  O=C1C2=C(C=C(N3CCC(C([H])=O)CC3)C=C2)N=C(C)N1C...    1.395446
+19        OC(CCCN1CC2=C(C=C(C=C2)N3CCC(C=O)CC3)C1=O)=O    1.381329
+196                 OC(CCCN1CC2=C(C=C(C=C2)C=O)C1=O)=O    1.367932
+191  O=C1C2=C(C=CC(N3CCC(C=O)CC3)=C2)N=C(C)N1CCCC(O)=O    1.314344
+92        O=C1C2=C(C=C(C=C2)N3CCC(C=O)CC3)CN1CCCC(O)=O    1.275305
+90         OC(CCCN1CC2=C(C=CC(N3CCC(C=O)C3)=C2)C1=O)=O    1.273145
+the R2 smiles hits number / the average of R2 smlies hits, or named Feature Intensity:
+                            r2_smiles  r2HitCount
+110  Cl.Cl.O1CCN(CC1)[C@H]2[C@H](N)C2   43.636976
+225         Cl.NCC1C(=O)Nc2c(cccc2)C1   42.321988
+280   Cl.NC[C@@H]1O[C@H](CC1)c2ccccc2   20.348974
+320                 Nc1cc(nn1)c2occc2   17.676581
+192      COc1cc2c(CC(N)C(O)=O)cnc2cc1   10.198727
+308       Cl.NCC1=NC2=C(COCC2)C(=O)N1    7.653590
+243          OC(=O)c1cc2c(ccc(N)c2)n1    7.592991
+242            Cl.NCc1nc(nn1)c2ccccc2    6.247705
+486               Nc1cc2c(cc1)nc(S)n2    6.217406
+311                  Nc1cc2c(cc1)ccn2    6.187106
+the R3 smiles hits number / the average of R3 smlies hits, or named Feature Intensity:
+                             r3_smiles  r3HitCount
+3723       OC(=O)c1nc2c(cc1)C(=O)NC=C2  135.348725
+10410   O=C1Oc2c(ccc(S(=O)(=O)Cl)c2)N1   93.434062
+24439    CCCNS(=O)(=O)c1ccc(C(O)=O)cc1   36.993508
+20096          OC(=O)c1nc(sc1)c2nccnc2   35.890491
+15891  OC(=O)C1CCN(CC1)c2n3c(nnn3)cnc2   33.684456
+34910          OC(=O)c1ncc(cc1)c2occc2   22.382769
+40309     OC(=O)c1ccc(cc1)C2NC(=O)CCC2   18.598571
+34387        OC(=O)c1c2c(nccn2)cc(F)c1   18.004639
+32660           N#Cc1c(C)nc(C(O)=O)cc1   17.071316
+56754    OC(=O)c1c2c(ncc1)nc(CC3CC3)n2   13.287118
+the R1R2 smiles hits number / the average of R1R2 smlies hits, or named Feature Intensity:
+                                            r1r2_smiles  r1r2HitCount
+284   OC(CCCN1CC2=C(C=C(C=C2)C=O)C1=O)=O-Cl.Cl.O1CCN...    196.796145
+227   O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...    163.199649
+245   O=C1C2=C(C=C(C=C2)C=O)CN1CCCC(O)=O-Cl.Cl.O1CCN...     83.174660
+1905  O=C1C2=C(C=C(C=O)C=C2)N=C(C)N1CCCC(O)=O-Cl.Cl....     82.708042
+948   O=C1C2=C(C=CC(C=O)=C2)N=C(C)N1CCCC(O)=O-Cl.Cl....     81.424843
+769   O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...     81.308188
+237   O=C1C2=C(C=CC(N3CCC(C=O)C3)=C2)CN1CCCC(O)=O-Cl...     63.693358
+941   OC(CCCN1CC2=C(C=C(C=C2)N3CCC(C=O)CC3)C1=O)=O-C...     62.526813
+577   O=C1C2=C(C=C(C=C2)N3CCC(C=O)CC3)CN1CCCC(O)=O-C...     59.727105
+968   OC(CCCC1=CC(C=O)=CC=C1)=O-Cl.Cl.O1CCN(CC1)[C@H...     52.494526
+the R1R3 smiles hits number / the average of R1R3 smlies hits, or named Feature Intensity:
+                                             r1r3_smiles  r1r3HitCount
+3743   O=C1C2=C(C=C(N3CCC(C([H])=O)CC3)C=C2)N=C(C)N1C...    129.069991
+3733   O=C1C2=C(C=CC(N3CCC(C=O)CC3)=C2)N=C(C)N1CCCC(O...    117.592290
+3779   OC(CCCN(CC1=C2C=CC(C3=CC(C=O)=CC=C3)=C1)C2=O)=...     99.834339
+36097  O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...     99.617778
+3778   O=C1C2=C(C=C(C=C2)N3CCC(C=O)CC3)CN1CCCC(O)=O-O...     87.273836
+3728   O=C1C2=C(C=CC(N3CCC(C=O)C3)=C2)CN1CCCC(O)=O-OC...     82.509508
+3763   OC(CCCN1CC2=C(C=CC(N3CCC(C=O)C3)=C2)C1=O)=O-OC...     80.343904
+3737   OC(CCCCCN(C1=O)C(C2=C(C=O)C=CC3=CC=CC1=C32)=O)...     71.898049
+10413  O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...     71.248367
+10416  OC(CCCN1CC2=C(C=C(C=C2)C=O)C1=O)=O-O=C1Oc2c(cc...     71.031807
+the R2R3 smiles hits number / the average of R2R3 smlies hits, or named Feature Intensity:
+                                             r2r3_smiles  r2r3HitCount
+2043   Cl.NCC1C(=O)Nc2c(cccc2)C1-O=Cc1cc(cnc1)c2ccc(F...    178.952645
+14674   NCc1nc(sc1)c2sccc2-OC(=O)c1c2c(ccc1)NC(=O)C(C)O2    148.013877
+36160  Nc1ccc(cc1)C(C(F)(F)F)(O)C(F)(F)F-OC(=O)Cc1cc(...     74.885881
+1458      Cl.NCC1C(=O)Nc2c(cccc2)C1-O=Cc1cc(ccc1)c2nnnn2     74.182727
+66406      NCc1nc(sc1)c2sccc2-O=C1Nc2c(OC1)c(ccc2)C(O)=O     68.909073
+399    Cl.NCC1C(=O)Nc2c(cccc2)C1-O=Cc1n(C)nc(c1)c2ccccc2     58.713343
+39577  Nc1ccc(cc1)c2nnnn2-OC(=O)C(Cc1ccccc1)N2C(=O)OCCC2     52.033382
+8277   Nc1cc(nn1)c2occc2-O=Cc1cc(ccc1)OC(C(O)=O)c2ccccc2     47.814459
+39                      Nc1cnc(cc1)N2C(=O)CC(=N2)C3CC3-X     41.134498
+2573   Cl.NCC1C(=O)Nc2c(cccc2)C1-OC(=O)CCc1oc(cn1)c2c...     38.321883
+the R1R2R3 smiles hits number / the average of R1R2R3 smlies hits, or named Feature Intensity:
+                                           r1r2r3_smiles  r1r2r3HitCount
+36174  O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...       69.063432
+2201   O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...       39.921059
+14807  O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...       35.928953
+39616  OC(CCCCCN(C1=O)C(C2=C(C=O)C=CC3=CC=CC1=C32)=O)...       32.336058
+54243  O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...       30.340005
+25818  O=C1C2=C(C=C(N3CCC(C([H])=O)CC3)C=C2)N=C(C)N1C...       25.549478
+51     O=C1C2=C(C=C(C=O)C=C2)N=NN1CCCC(O)=O-Nc1cnc(cc...       24.751056
+8303   O=C1C2=C(C=C(C=C2)C=O)CN1CCCC(O)=O-Nc1cc(nn1)c...       21.956582
+2049   O=C(O)CCC1=CC=CC(C2=CN=C(C=O)C=C2)=C1-Cl.NCC1C...       21.557372
+1506   O=C(N1CCC(C=O)CC1)C2=CC=C(N3CCCN(CCCCCC(O)=O)C...       20.359740
+以上,合并两次实验组,两次对照组,并作差后对smiles进行count
