@@ -1,6 +1,12 @@
 # Irrelevant-Manual  
 
-
+## database  
+https://www.uniprot.org/  
+https://www.rcsb.org/  
+https://www.ebi.ac.uk/chembl/  
+https://pubchem.ncbi.nlm.nih.gov/  
+https://www.cnipa.gov.cn/  
+https://www.epo.org/en  
 
 ## reinvent  
 molecule generation  
@@ -16,8 +22,6 @@ https://openmm.org/
 relative binding free energy perturbation calculation   
 https://github.com/UCL-CCS/TIES  
 https://github.com/UCL-CCS/TIES_MD  
-https://github.com/pablo-arantes/making-it-rain  
-https://ambermd.org/AmberTools.php  
 
 ## boltz  
 structural prediction  
@@ -36,7 +40,8 @@ https://github.com/MolecularAI/aizynthfinder
 screening data analysis  
 
 ## Examples  
+workflow of de novo design 
 ![example4reinvent](images/reinvent.jpeg)   
-
-  
+    
+performance to predict activity
 ![example4mmgbsa](images/mmgbsa.jpeg)
