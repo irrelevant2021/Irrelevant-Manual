@@ -345,7 +345,7 @@ prot = u.select_atoms('protein')
 lmol = plf.Molecule.from_mda(lig)
 pmol = plf.Molecule.from_mda(prot)
 
-fp = plf.Fingerprint(count=True)
+fp = plf.Fingerprint()
 fp.run(u.trajectory[::10], lig, prot)
 net = LigNetwork.from_fingerprint(fp, lmol)
 net.save('fp.html') #mod
