@@ -1,0 +1,279 @@
+Remark line goes here
+MASS
+N  14.010        0.530
+H  1.008         0.161
+CT 12.010        0.878
+CM 12.010        0.360
+CA 12.010        0.360
+C  12.010        0.616
+O  16.000        0.434
+F  19.000        0.320
+HA 1.008         0.167
+N* 14.010        0.530
+CK 12.010        0.360
+NC 14.010        0.530
+N2 14.010        0.530
+H4 1.008         0.167
+NB 14.010        0.530
+CB 12.010        0.360
+H1 1.008         0.135
+HC 1.008         0.135
+
+BOND
+H -N   434.00   1.010
+CT-N   337.00   1.449
+CT-CT  310.00   1.526
+CT-H1  340.00   1.090
+C -CT  317.00   1.522
+CT-HC  340.00   1.090
+CM-N   477.00   1.343       same as CR-NA, penalty score=  5.0
+CA-CM  427.00   1.433
+CM-HA  367.00   1.080
+CA-CA  469.00   1.400
+C -CA  469.00   1.409
+CA-HA  367.00   1.080
+CA-CT  317.00   1.510
+CA-F   386.00   1.359
+C -O   570.00   1.229
+C -N   490.00   1.335
+CM-N*  448.00   1.365
+CK-N*  440.00   1.371
+CB-N*  436.00   1.374
+CA-CK  427.00   1.433       same as CA-CM, penalty score=  0.6
+CK-NB  529.00   1.304
+CA-NC  483.00   1.339
+CA-H4  367.00   1.080
+CA-N2  481.00   1.340
+H -N2  434.00   1.010
+CB-NB  414.00   1.391
+CB-CM  512.00   1.375       same as CC-CV, penalty score=  0.7
+CB-CB  520.00   1.370
+CM-CM  549.00   1.350
+CB-NC  461.00   1.354
+
+ANGLE
+CT-CT-N    80.000     109.700
+H1-CT-N    50.000     109.500
+C -CT-N    63.000     110.100
+CT-N -H    50.000     118.040
+CT-CT-CT   40.000     109.500
+CT-CT-HC   50.000     109.500
+CT-C -O    80.000     120.400
+CT-CT-H1   50.000     109.500
+C -CT-CT   63.000     111.100
+CM-N -CT   50.000     123.200   same as CA-N2-CT, penalty score=  2.6
+CA-CM-N    70.000     120.100   same as CM-CA-N2, penalty score= 11.5
+CA-CA-CM   63.000     120.000   same as CA-CA-CA, penalty score=  1.1
+C -CA-CM   63.000     120.000   same as C -CA-CA, penalty score=  1.1
+CA-CM-HA   50.000     123.300
+CA-CA-CA   63.000     120.000
+CA-CA-HA   50.000     120.000
+CA-C -CA   63.000     120.000
+CA-C -O    80.000     125.300   same as CM-C -O , penalty score=  1.1
+C -CA-CA   63.000     120.000
+CA-CA-CT   70.000     120.000
+CA-CA-F    70.000     121.000
+CA-CT-HC   50.000     109.500
+CT-C -N    70.000     116.600
+C -CT-HC   50.000     109.500
+C -N -CT   50.000     121.900
+C -N -H    50.000     120.000
+N -C -O    80.000     122.900
+CA-CT-H1   50.000     109.500   same as CA-CT-HC, penalty score=  0.1
+CA-CM-CA   63.000     117.000   same as CA-CM-CM, penalty score=  1.1
+CA-CM-N*   70.000     121.200   same as CM-CM-N*, penalty score=  1.1
+CM-CA-HA   50.000     120.000   same as CA-CA-HA, penalty score=  1.1
+CK-N*-CM   70.000     105.400   same as CB-N*-CK, penalty score=  1.7
+CB-N*-CM   70.000     105.400   same as CB-N*-CK, penalty score=  2.5
+N*-CK-NB   70.000     113.900
+CB-CB-N*   70.000     106.200
+N*-CB-NC   70.000     126.200
+CB-N*-CK   70.000     105.400
+CA-CA-CK   63.000     120.000   same as CA-CA-CB, penalty score=  0.8
+CB-NB-CK   70.000     103.800
+CA-CA-NC   70.000     121.500   same as CM-CA-NC, penalty score=  1.1
+CA-CA-N2   70.000     120.100   same as CM-CA-N2, penalty score=  1.1
+CA-CA-H4   50.000     120.000
+CA-NC-CA   70.000     118.600   same as CA-NC-CQ, penalty score=  0.3
+H4-CA-NC   50.000     119.100   same as H4-CM-N*, penalty score= 19.5
+N2-CA-NC   70.000     119.300
+CA-N2-H    50.000     120.000
+H -N2-H    35.000     120.000
+CM-CB-NB   70.000     132.400   same as CA-CB-NB, penalty score=  1.1
+CB-CB-NB   70.000     110.400
+CB-CM-CM   63.000     117.000   same as CA-CM-CM, penalty score=  2.8
+CB-CM-HA   50.000     119.700   same as CM-CM-HA, penalty score=  1.7
+CB-CB-NC   70.000     127.700
+CB-CB-CM   63.000     117.300   same as CA-CB-CB, penalty score=  1.1
+CA-CM-CM   63.000     117.000
+CM-CM-HA   50.000     119.700
+CM-CA-CM   63.000     120.000   same as CA-CA-CA, penalty score=  2.2
+CM-CA-NC   70.000     121.500
+CA-NC-CB   70.000     112.200
+H1-CT-H1   35.000     109.500
+HC-CT-HC   35.000     109.500
+C -CT-H1   50.000     109.500
+
+DIHE
+CT-CT-CT-N    9    1.400         0.000           3.000
+HC-CT-CT-N    9    1.400         0.000           3.000
+O -C -CT-N    6    0.000         0.000           2.000
+CT-CT-N -H    6    0.000         0.000           2.000
+H1-CT-N -H    6    0.000         0.000           2.000
+C -CT-N -H    6    0.000         0.000           2.000
+CT-CT-CT-CT   1    0.180         0.000          -3.000
+CT-CT-CT-CT   1    0.250       180.000          -2.000
+CT-CT-CT-CT   1    0.200       180.000           1.000
+CT-CT-CT-HC   1    0.160         0.000           3.000
+O -C -CT-CT   6    0.000         0.000           2.000
+CT-CT-CT-H1   9    1.400         0.000           3.000
+CT-CT-N -CM   6    0.000         0.000           2.000
+CA-CM-N -CT   4    6.100       180.000           2.000      same as X -CN-NA-X , penalty score=736.5
+HA-CM-N -CT   4    6.100       180.000           2.000      same as X -CN-NA-X , penalty score=736.5
+CA-CA-CM-N    4   10.200       180.000           2.000
+C -CA-CM-N    4   10.200       180.000           2.000
+CA-CA-CA-CM   4   14.500       180.000           2.000
+CM-CA-CA-HA   4   14.500       180.000           2.000
+CA-C -CA-CM   4   14.500       180.000           2.000
+O -C -CA-CM   4   14.500       180.000           2.000
+CA-CA-CA-CA   4   14.500       180.000           2.000
+CA-CA-CA-HA   4   14.500       180.000           2.000
+CA-C -CA-CA   4   14.500       180.000           2.000
+O -C -CA-CA   4   14.500       180.000           2.000
+CA-CA-CA-CT   4   14.500       180.000           2.000
+C -CA-CA-CA   4   14.500       180.000           2.000
+CA-CA-CA-F    4   14.500       180.000           2.000
+CA-CA-CT-C    6    0.000         0.000           2.000
+CA-CA-CT-HC   6    0.000         0.000           2.000
+N -C -CT-CA   6    0.000         0.000           2.000
+O -C -CT-CA   6    0.000         0.000           2.000
+C -CA-CA-HA   4   14.500       180.000           2.000
+CA-C -CA-F    4   14.500       180.000           2.000
+O -C -CA-F    4   14.500       180.000           2.000
+C -CA-CA-CT   4   14.500       180.000           2.000
+CT-CA-CA-F    4   14.500       180.000           2.000
+CT-C -N -CT   4   10.000       180.000           2.000
+CT-C -N -H    4   10.000       180.000           2.000
+CA-CT-N -C    6    0.000         0.000           2.000
+H1-CT-N -C    6    0.000         0.000           2.000
+CA-CA-CT-N    6    0.000         0.000           2.000
+CT-CA-CA-HA   4   14.500       180.000           2.000
+CA-CA-CM-CA   4   10.200       180.000           2.000
+CA-CA-CM-N*   4   10.200       180.000           2.000
+HA-CA-CM-CA   4   10.200       180.000           2.000
+CA-CM-N*-CK   4    7.400       180.000           2.000
+CA-CM-N*-CB   4    7.400       180.000           2.000
+CA-CK-N*-CM   4    6.800       180.000           2.000
+NB-CK-N*-CM   4    6.800       180.000           2.000
+CB-CB-N*-CM   4    6.600       180.000           2.000
+NC-CB-N*-CM   4    6.600       180.000           2.000
+HA-CA-CA-HA   4   14.500       180.000           2.000
+HA-CA-CM-N*   4   10.200       180.000           2.000
+CA-CA-CK-N*   4   10.200       180.000           2.000      same as X -CA-CM-X , penalty score=138.0
+N*-CK-NB-CB   2   20.000       180.000           2.000
+CB-CB-N*-CK   4    6.600       180.000           2.000
+NC-CB-N*-CK   4    6.600       180.000           2.000
+CA-CA-CA-CK   4   14.500       180.000           2.000
+CK-CA-CA-HA   4   14.500       180.000           2.000
+CK-CA-CA-NC   4   14.500       180.000           2.000
+CK-CA-CA-N2   4   14.500       180.000           2.000
+CM-CB-NB-CK   2    5.100       180.000           2.000
+CB-CB-NB-CK   2    5.100       180.000           2.000
+CA-CK-NB-CB   2   20.000       180.000           2.000
+CA-CA-N2-H    4    9.600       180.000           2.000
+CA-CA-CA-NC   4   14.500       180.000           2.000
+CA-CA-CA-N2   4   14.500       180.000           2.000
+CA-CA-CA-H4   4   14.500       180.000           2.000
+CA-CA-NC-CA   2    9.600       180.000           2.000
+N2-CA-NC-CA   2    9.600       180.000           2.000
+NC-CA-N2-H    4    9.600       180.000           2.000
+H4-CA-NC-CA   2    9.600       180.000           2.000
+HA-CA-CA-NC   4   14.500       180.000           2.000
+H4-CA-CA-HA   4   14.500       180.000           2.000
+CA-CA-CK-NB   4   10.200       180.000           2.000      same as X -CA-CM-X , penalty score=138.0
+NB-CB-CM-CM   4   10.200       180.000           2.000      same as X -CA-CM-X , penalty score=198.5
+NB-CB-CM-HA   4   10.200       180.000           2.000      same as X -CA-CM-X , penalty score=198.5
+N*-CB-CB-NB   4   21.800       180.000           2.000
+NB-CB-CB-NC   4   21.800       180.000           2.000
+CA-CM-CM-CB   4   26.600       180.000           2.000
+CB-CM-CM-HA   4   26.600       180.000           2.000
+CM-CB-CB-N*   4   21.800       180.000           2.000
+CM-CB-CB-NC   4   21.800       180.000           2.000
+CM-CA-CM-CM   4   10.200       180.000           2.000
+NC-CA-CM-CM   4   10.200       180.000           2.000
+CM-CA-CM-CA   4   10.200       180.000           2.000
+CM-CA-NC-CB   2    9.600       180.000           2.000
+N*-CB-NC-CA   2    8.300       180.000           2.000
+CB-CB-NC-CA   2    8.300       180.000           2.000
+NC-CA-CM-CA   4   10.200       180.000           2.000
+CA-CK-N*-CB   4    6.800       180.000           2.000
+NB-CK-N*-CB   4    6.800       180.000           2.000
+CB-CB-CM-CM   4   10.200       180.000           2.000      same as X -CA-CM-X , penalty score=198.5
+CB-CB-CM-HA   4   10.200       180.000           2.000      same as X -CA-CM-X , penalty score=198.5
+CM-CA-CM-HA   4   10.200       180.000           2.000
+NC-CA-CM-HA   4   10.200       180.000           2.000
+CA-CM-CM-HA   4   26.600       180.000           2.000
+HA-CM-CM-HA   4   26.600       180.000           2.000
+CA-CA-CT-H1   6    0.000         0.000           2.000
+CA-CT-N -H    6    0.000         0.000           2.000
+O -C -N -CT   4   10.000       180.000           2.000
+O -C -N -H    1    2.500       180.000          -2.000
+O -C -N -H    1    2.000         0.000           1.000
+N -C -CT-HC   6    0.000         0.000           2.000
+O -C -CT-HC   1    0.800         0.000          -1.000
+O -C -CT-HC   1    0.000         0.000          -2.000
+O -C -CT-HC   1    0.080       180.000           3.000
+CA-CA-CM-HA   4   10.200       180.000           2.000
+C -CA-CM-HA   4   10.200       180.000           2.000
+H1-CT-N -CM   6    0.000         0.000           2.000
+H1-CT-CT-HC   9    1.400         0.000           3.000
+HC-CT-CT-HC   1    0.150         0.000           3.000
+O -C -CT-H1   1    0.800         0.000          -1.000
+O -C -CT-H1   1    0.000         0.000          -2.000
+O -C -CT-H1   1    0.080       180.000           3.000
+C -CT-CT-CT   9    1.400         0.000           3.000
+C -CT-CT-HC   9    1.400         0.000           3.000
+
+IMPROPER
+CA-H1-CM-N          1.1          180.0         2.0          Using the default value
+C -CA-CA-CM         1.1          180.0         2.0          Using the default value
+CA-CA-CA-H1         1.1          180.0         2.0          Using the default value
+CA-CA-CA-CT         1.1          180.0         2.0
+C -CA-CA-F          1.1          180.0         2.0          Using the default value
+CA-CA-C -O         10.5          180.0         2.0          Using general improper torsional angle  X- X- C- O, penalty score=  6.0)
+CT-N -C -O         10.5          180.0         2.0          Using general improper torsional angle  X- X- C- O, penalty score=  6.0)
+C -CT-N -H          1.1          180.0         2.0
+CA-CM-CA-H1         1.1          180.0         2.0          Using the default value
+CA-CA-CM-N*         1.1          180.0         2.0          Using the default value
+CB-CK-N*-CM         1.1          180.0         2.0          Using the default value
+CA-N*-CK-NB         1.1          180.0         2.0          Using the default value
+CA-CA-CA-CK         1.1          180.0         2.0          Using the default value
+CA-H4-CA-NC         1.1          180.0         2.0          Using the default value
+CA-N2-CA-NC         1.1          180.0         2.0          Using the default value
+CA-H -N2-H          1.0          180.0         2.0          Using general improper torsional angle  X- X-N2- H, penalty score=  6.0)
+CB-CM-CB-NB         1.1          180.0         2.0          Using the default value
+CB-CM-CM-H1         1.1          180.0         2.0          Using the default value
+CA-CM-CM-H1         1.1          180.0         2.0          Using the default value
+CM-CM-CA-NC         1.1          180.0         2.0          Using the default value
+CA-CA-CM-CA         1.1          180.0         2.0          Using the default value
+CB-N*-CB-NC         0.0          180.0         2.0
+
+NONBON
+  N           1.8240  0.1700
+  H           0.6000  0.0157
+  CT          1.9080  0.1094
+  CM          1.9080  0.0860
+  CA          1.9080  0.0860
+  C           1.9080  0.0860
+  O           1.6612  0.2100
+  F           1.7500  0.0610
+  HA          1.4590  0.0150
+  CK          1.9080  0.0860
+  N2          1.8240  0.1700             same as N  
+  H4          1.4090  0.0150
+  CB          1.9080  0.0860
+  H1          1.3870  0.0157
+  HC          1.4870  0.0157
+
+
+
