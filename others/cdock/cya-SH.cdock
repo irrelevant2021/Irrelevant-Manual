@@ -1,0 +1,5 @@
+RECEPTOR_SMARTS_PATTERN  2,[C]-[S]
+LIGAND_SMARTS_PATTERN    1,[C]=[C][c][n]
+CUSTOM_CHEMISTRY         ("<2>=[C]",("bond",1,(1,2)))
+CUSTOM_CHEMISTRY         ("<1>|<2>",("bond", 1,(1,2)))
+

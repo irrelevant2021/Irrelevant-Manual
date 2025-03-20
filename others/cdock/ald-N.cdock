@@ -1,0 +1,20 @@
+#
+# Built-in reaction: Imine Condensation
+#
+# Formation of an imine from a receptor amine
+# and a ligand ketone.
+#
+# Receptor LYS, nitrogen is <1>
+RECEPTOR_SMARTS_PATTERN 2,[C]-[N;H2,H3]
+
+# Ligand, carbonyl carbon is <2>
+LIGAND_SMARTS_PATTERN 1,C(=O)-c1ccccc1
+
+# Neutralize the LYS, if necessary
+CUSTOM_CHEMISTRY ("<1>",("charge",0,1))
+
+# Delete the ligand oxygen
+CUSTOM_CHEMISTRY ("<2>(=[O])",("delete",2))
+
+# Add ligand-receptor C=N double bond
+CUSTOM_CHEMISTRY ("<1>|<2>",("bond",2,(1,2)))
