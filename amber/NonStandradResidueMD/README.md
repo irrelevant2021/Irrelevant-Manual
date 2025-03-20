@@ -34,6 +34,7 @@ antechamber -fi pdb -i ligand_h.pdb -bk LIG -fo ac -o lig.ac -c bcc -at amber -n
 	#检查lig.ac（相当于mol2）中的原子类型，N端为N（不能是NT、n8什么其他的，你可以直接改成N），C端为C，DU（Undefined）也是不行的。  
 	#大多数情况是在tleap之后，查看leap.log再回来修改lig.ac，但其实我们不知道是原子类型的问题还是预处理的差错，所以每一步都用pymol检查，且不要跳过麻烦的预处理。  
 	#直接用gaff2似乎不行，我的理解the residue部分依赖amber立场，不然连接主链的原子类型会不匹配。  
+ 	#这一步可以用高斯计算，但我是amber套件用户...
   
 ### 定义如何连接非标准残基  
 编辑lig.mc文件  
@@ -55,7 +56,7 @@ parmchk2 -i lig.prepin -f prepi -o frcmod.lig -a Y \
          -p $AMBERHOME/dat/leap/parm/parm10.dat  
 grep -v "ATTN" frcmod.lig > frcmod1.lig  
 parmchk2 -i lig.prepin -f prepi -o frcmod2.lig  
-		#检查frcmod.lig中有无ATTN标记，意为不合理的力场参数，需用其他力场类型计算  
+	#检查frcmod.lig中有无ATTN标记，意为不合理的力场参数，需用其他力场类型计算  
   
 ### leap  
 编辑leap.in文件  
