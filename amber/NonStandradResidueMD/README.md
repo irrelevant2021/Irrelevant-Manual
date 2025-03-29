@@ -6,7 +6,7 @@
 非标准残基模拟的输入工作确实非常繁琐，每一个体系（不同的残基）几乎都需要去肉眼独立检查，所以作自动化大规模筛选（工业化）难以实现。  
 不要过度依赖各种自动修复pdb的软件（我已经不止一次发现Wizard犯傻了），尤其在一些突变的晶体中，序列align十分不可靠，会导致修复的随心所欲（任何模拟，不仅限于此，推荐检查后删除或修改pdb突变残基使其能确实align后再自动修复）。  
 随时用pymol检查结构！一些文件格式在pymol中会全变单键，不是文件错了，我们需要了解正确的键长键角二面角等等。  
-综上需要一些化学知识、蛋白知识、模拟知识^ ^  
+ 
 ### 预处理
 用maetro修复Non-standard residue的pdb。  
 
@@ -20,20 +20,20 @@ extract LIG 和 the residue（the residue和LIG组合，即非标准残基）。
 ————修改resname为LIG  
 ————后存为LIG.pdb 
   
-pdbfixer mae.pdb --output=protein.pdb --keep-heterogens=all --add-residues --add-atoms=none --replace-nonstandard  
+`pdbfixer mae.pdb --output=protein.pdb --keep-heterogens=all --add-residues --add-atoms=none --replace-nonstandard`  
   
-pdb4amber -i LIG.pdb -o ligand_h.pdb  
+`pdb4amber -i LIG.pdb -o ligand_h.pdb`  
   
 用文本编辑器修改ligand_h.pdb的resnum后，将这些原子复制到protein.pdb中（对应resnum位置），没有多余TER，END，删除多余原子（之间记录的H）存为protein_ligand_0.pdb  
   
-pdb4amber -i protein_ligand_0.pdb -o protein_ligand.pdb  
-	#以上，protein和LIG的预处理十分麻烦，但都是我摸爬滚打出来的。。  
+`pdb4amber -i protein_ligand_0.pdb -o protein_ligand.pdb`  
+	#以上，protein和LIG的预处理十分麻烦。  
   
 ### 计算电荷
-antechamber -fi pdb -i ligand_h.pdb -bk LIG -fo ac -o lig.ac -c bcc -at amber -nc -1   
+`antechamber -fi pdb -i ligand_h.pdb -bk LIG -fo ac -o lig.ac -c bcc -at amber -nc -1`   
 	#检查lig.ac（相当于mol2）中的原子类型，N端为N（不能是NT、n8什么其他的，你可以直接改成N），C端为C，DU（Undefined）也是不行的。  
 	#大多数情况是在tleap之后，查看leap.log再回来修改lig.ac，但其实我们不知道是原子类型的问题还是预处理的差错，所以每一步都用pymol检查，且不要跳过麻烦的预处理。  
-	#直接用gaff2似乎不行，我的理解the residue部分依赖amber立场，不然连接主链的原子类型会不匹配。  
+	#直接用gaff2似乎不行。  
  	#这一步可以用高斯计算，但我是amber套件用户
   
 ### 定义如何连接非标准残基  
@@ -87,4 +87,5 @@ savepdb SYS SYS.pdb
 quit  
 	"  
   
-tleap -f leap.in  
+`tleap -f leap.in`  
+	#十有八九会报错。。根据报错内容做调整吧。  
