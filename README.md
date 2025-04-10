@@ -38,7 +38,11 @@ https://github.com/MolecularAI/aizynthfinder
 
 ## DEL  
 screening data analysis  
-
+  
+## Knime  
+workflow  
+https://hub.knime.com/  
+  
 ## Examples  
 workflow of de novo design 
 ![example4reinvent](images/reinvent.jpeg)   
