@@ -1,6 +1,6 @@
 [https://github.com/OpenFreeEnergy/openfe]  
 
-`openfe plan-rbfe-network -M tyk2_ligands.sdf -p tyk2_protein.pdb -o network_setup`  
+`openfe plan-rbfe-network -M tyk2_ligands.sdf -p tyk2_protein.pdb -o network_setup` OR `python transformations.py`  
 `openfe view-ligand-network network_setup/ligand_network.graphml`  
-`openfe quickrun path/to/transformation.json -o results.json -d working-directory`  
+`openfe quickrun path/to/transformation.json -o results.json -d working-directory`  OR `bash run.py`
 `openfe gather results/ --report dg -o final_results.tsv`  
