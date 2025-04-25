@@ -1,7 +1,7 @@
 #!/bin/bash
 
 for file in transformations/*.json; do
-  relpath=${file:16}  # strip off "network_setup/transformations/"
+  relpath=${file:16}  # strip off "transformations/"
 #  echo $relpath
   dirpath=${relpath%.*}  # strip off final ".json"
 #  echo $dirpath
