@@ -34,11 +34,12 @@ ligand_network = network_planner(
     scorer=scorer
 )
 
-#show some edges
+#show edge score
 from openfe.utils.atommapping_network_plotting import plot_atommapping_network
 plot_atommapping_network(ligand_network)
 
-mapping = next(iter(ligand_network.edges))
+for mapping in ligand_network.edges:
+    print(mapping.componentA, mapping.componentB, mapping.annotations)
 
 #write map
 with open("ligand_network.graphml", mode='w') as f:
