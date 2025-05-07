@@ -34,7 +34,7 @@ device=$(seq 0 $((num_gpu - 1)))
 echo "using device: $device"
 for i in $device
 do
-#	(
+	(
         echo "working on gpu device $i ..."
 	#declare that "list$i" is a $var
         declare -n current_list="list$i"
@@ -46,7 +46,7 @@ do
 		echo $file
 		echo $dirpath
         	sed -i 's/"gpu_device_index": null/"gpu_device_index": ['$i']/g' $json
-#	        openfe quickrun $json -o results/$file -d results/$dirpath
+	        openfe quickrun $json -o results/$file -d results/$dirpath
         done
-#	) > $i.log 2>&1 < /dev/null &
+	) > $i.log 2>&1 < /dev/null &
 done
