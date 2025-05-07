@@ -64,6 +64,7 @@ do
 	(
         echo "working on gpu device $i ..."
         declare -n current_list="list$i"
+	#declare that "list$i" is a $var
         for dir in "${current_list[@]}"
         do
                 echo $dir
