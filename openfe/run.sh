@@ -4,7 +4,7 @@ num_gpu=6
 current_list_index=0
 
 #multi-GPU & run
-total=$(ls ls ./transformations/*json | wc -l)
+total=$(ls ./transformations/*json | wc -l)
 per=$((total / num_gpu))
 echo "------"
 echo "total tasks: $total"
