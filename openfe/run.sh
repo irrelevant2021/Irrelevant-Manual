@@ -12,7 +12,24 @@ echo "gpu num setting: $num_gpu"
 echo "running $per tasks per gpu"
 echo "------"
 
-for subdir in $(ls ./transformations/*json)
+for subdir in $(ls ./transformations/*complex*json)
+do
+        list_index=$((current_list_index % num_gpu))
+	#if $var match x), then execute
+        case $list_index in
+		0) list0+=("$subdir") ;;
+	        1) list1+=("$subdir") ;;
+        	2) list2+=("$subdir") ;;
+	        3) list3+=("$subdir") ;;
+        	4) list4+=("$subdir") ;;
+	        5) list5+=("$subdir") ;;
+        	6) list6+=("$subdir") ;;
+	        7) list7+=("$subdir") ;;
+        esac
+        current_list_index=$((current_list_index + 1))
+done
+
+for subdir in $(ls ./transformations/*solvent*json)
 do
         list_index=$((current_list_index % num_gpu))
 	#if $var match x), then execute
