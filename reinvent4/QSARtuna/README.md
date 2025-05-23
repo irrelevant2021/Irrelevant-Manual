@@ -1,5 +1,5 @@
 #### ‘QSARtuna.ipynb’   
-  is for building model of QSAR.  
+  is for building model of QSAR.  （merged model using train+test data.）
 
   
 #### 'staged_learning.toml'   
