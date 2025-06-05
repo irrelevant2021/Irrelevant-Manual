@@ -18,11 +18,6 @@ https://github.com/pablo-arantes/making-it-rain
 https://ambermd.org/AmberTools.php  
 https://openmm.org/
 
-## TIES
-relative binding free energy perturbation calculation   
-https://github.com/UCL-CCS/TIES  
-https://github.com/UCL-CCS/TIES_MD  
-
 ## boltz  
 structural prediction  
 https://github.com/jwohlwend/boltz  
