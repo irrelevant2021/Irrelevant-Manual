@@ -27,3 +27,19 @@ add maven <http://maven.aliyun.com/nexus/content/groups/public/>
 ###### datawarrior:  
   SELECT * FROM $your_table;  
   jdbc:mysql://192.168.1.x:3306/$your_datebase?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC  
+
+### 主键更新:  
+step1, 用knime标准化smiles,得DW-202xxxxx-canion.csv  
+step2, 用dbeaver导入DW-202xxxxx-canion.csv,以COMPOUNDS为主键,ON DUPLICATE KEY UPDATE  
+  
+### 数据更新:     
+##### 一般数据更新:   
+reinvent/qsar/mmgbsa/boltz...    
+用dbeaver导入数据,以COMPOUNDS为主键,ON DUPLICATE KEY UPDATE  
+##### 生物数据更新:  
+step1.1, 将源表xlsx另存为UTF-8.csv;  
+step1.2, 更换headerxxx.csv表头,得RD0x_202xxxxx-UTF8.csv  
+step2, `python average.py -i RD0x_202xxxxx-UTF8.csv -o RD0x_202xxxxx.csv`, 得均值表格RD0x_202xxxxx.csv  
+step3.1, 打开RD0x_202xxxxx.csv,目视检查,只取一个Batch,对应主键(主要筛选P1+空白,特殊Px替换P1);  
+step3.2, 换算所需数据(见header.csv非表头内容),存为RD0x_202xxxxx-update.csv  
+step4, 用dbeaver导入RD0x_202xxxxx-update.csv,以COMPOUNDS为主键,ON DUPLICATE KEY UPDATE  
