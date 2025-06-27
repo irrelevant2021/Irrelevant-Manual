@@ -26,7 +26,9 @@ add maven <http://maven.aliyun.com/nexus/content/groups/public/>
   在 INSERT ... ON DUPLICATE KEY UPDATE 中，只有你在 ON DUPLICATE KEY UPDATE 子句里明确指定更新的列，才会被新值替换；没有被指定更新的列，保持原有数据不变  
 ###### datawarrior:  
   SELECT * FROM $your_table;  
-  jdbc:mysql://192.168.1.x:3306/$your_datebase?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC  
+  jdbc:mysql://192.168.1.x:3306/$your_datebase?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC   
+    
+  在datawarrior保存最新的来自mysql的数据, 用该文件merge你之前定制的可视化datawarrior文件, 随后decompose R group（existing）/recalculate all columns, 以更新可视化文件(将最新的数据融入你的定制可视化方式)   
 
 ### 主键更新:  
 step1, 用knime标准化smiles,得DW-202xxxxx-canion.csv  
