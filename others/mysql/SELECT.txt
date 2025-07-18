@@ -1,0 +1,160 @@
+jdbc:mysql://192.168.1.x:330x/xxx?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+
+SELECT * FROM YourTable;
+    
+########################AKT########################
+
+SELECT
+    M.ID,
+    AVG(CASE WHEN CT.Label = 'AKT1-WT-NanoBRET' THEN A.ValueDetail ELSE NULL END) AS CT_AKT1_WT_NanoBRET,
+    AVG(CASE WHEN CT.Label = 'AKT1-E17K-NanoBRET' THEN A.ValueDetail ELSE NULL END) AS CT_AKT1_E17K_NanoBRET,
+    AVG(CASE WHEN CT.Label = 'AKT2-NanoBRET' THEN A.ValueDetail ELSE NULL END) AS CT_AKT2_NanoBRET,
+    AVG(CASE WHEN CT.Label = 'AKT3-NanoBRET' THEN A.ValueDetail ELSE NULL END) AS CT_AKT3_NanoBRET,
+    AVG(CASE WHEN CT.Label = 'AKT1-WT_HiBit' THEN A.ValueDetail ELSE NULL END) AS CT_AKT1_WT_HiBit,
+    AVG(CASE WHEN CT.Label = 'AKT1-E17K_HiBit' THEN A.ValueDetail ELSE NULL END) AS CT_AKT1_E17K_HiBit,
+    AVG(CASE WHEN CT.Label = 'nonATK_HCC1806' THEN A.ValueDetail ELSE NULL END) AS CT_nonATK_HCC1806,
+    AVG(CASE WHEN CT.Label = 'AKT1_LNCAP' THEN A.ValueDetail ELSE NULL END) AS CT_AKT1_LNCAP,
+    AVG(CASE WHEN CT.Label = 'AKT2_YSCCC' THEN A.ValueDetail ELSE NULL END) AS CT_AKT2_YSCCC,
+    AVG(CASE WHEN CT.Label = 'AKT3_COLO-684' THEN A.ValueDetail ELSE NULL END) AS CT_AKT3_COLO_684,
+    AVG(CASE WHEN CT.Label = 'AKT3_TY-82' THEN A.ValueDetail ELSE NULL END) AS CT_AKT3_TY_82,
+    AVG(CASE WHEN CT.Label = 'AKT-E17K_BaF3' THEN A.ValueDetail ELSE NULL END) AS CT_AKT_E17K_BaF3,
+    AVG(CASE WHEN CT.Label = 'Het_LAPC4' THEN A.ValueDetail ELSE NULL END) AS CT_Het_LAPC4,
+    M.Code,
+    M.Alias,
+    M.Comment,
+    M.Smiles,
+    M.HasActivity
+FROM
+    Activities AS A
+INNER JOIN
+    CaseTypes AS CT ON A.CaseTypeID = CT.ID
+INNER JOIN
+    CaseMolecules AS CM ON A.CaseMoleculeID = CM.ID
+RIGHT JOIN
+    Molecules AS M ON CM.MoleculeID = M.ID
+WHERE
+    M.Target = 'AKT'
+GROUP BY
+    M.ID;
+
+
+
+########################EGFR########################
+
+SELECT
+    M.ID,
+    AVG(CASE WHEN CT.Label = 'pEGFR LTC' THEN A.ValueDetail ELSE NULL END) AS CT_pEGFR_LTC,
+    AVG(CASE WHEN CT.Label = 'EGFR WT' THEN A.ValueDetail ELSE NULL END) AS CT_EGFR_WT,
+    AVG(CASE WHEN CT.Label = 'EGFR LT' THEN A.ValueDetail ELSE NULL END) AS CT_EGFR_LT,
+    AVG(CASE WHEN CT.Label = 'EGFR LTC' THEN A.ValueDetail ELSE NULL END) AS CT_EGFR_LTC,
+    AVG(CASE WHEN CT.Label = 'EGFR DTC' THEN A.ValueDetail ELSE NULL END) AS CT_EGFR_DTC,
+    M.Code,
+    M.Alias,
+    M.Target,
+    M.Comment,
+    M.Smiles,
+    M.HasActivity
+FROM
+    Activities AS A
+INNER JOIN
+    CaseTypes AS CT ON A.CaseTypeID = CT.ID
+INNER JOIN
+    CaseMolecules AS CM ON A.CaseMoleculeID = CM.ID
+RIGHT JOIN
+    Molecules AS M ON CM.MoleculeID = M.ID
+WHERE
+    M.Target = 'EGFR'
+GROUP BY
+    M.ID;
+
+
+
+########################ADMET########################
+
+
+SELECT
+    M.ID,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'molecular_weight' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_molecular_weight,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'molecular_weight' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_molecular_weight,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'logP' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_logP,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'logP' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_logP,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'hydrogen_bond_acceptors' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_hydrogen_bond_acceptors,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'hydrogen_bond_acceptors' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_hydrogen_bond_acceptors,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'hydrogen_bond_donors' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_hydrogen_bond_donors,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'hydrogen_bond_donors' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_hydrogen_bond_donors,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Lipinski' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_Lipinski,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Lipinski' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_Lipinski,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'QED' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_QED,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'QED' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_QED,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'tpsa' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_tpsa,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'tpsa' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_tpsa,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'BBB_Martins' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_BBB_Martins,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'BBB_Martins' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_BBB_Martins,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Bioavailability_Ma' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_Bioavailability_Ma,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Bioavailability_Ma' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_Bioavailability_Ma,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'hERG' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_hERG,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'hERG' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_hERG,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Caco2_Wang' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_Caco2_Wang,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Caco2_Wang' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_Caco2_Wang,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Clearance_Hepatocyte_AZ' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_Clearance_Hepatocyte_AZ,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Clearance_Hepatocyte_AZ' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_Clearance_Hepatocyte_AZ,
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Clearance_Microsome_AZ' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_Clearance_Microsome_AZ,   
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Clearance_Microsome_AZ' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_Clearance_Microsome_AZ, 
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Half_Life_Obach' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_Half_Life_Obach, 
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Half_Life_Obach' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_Half_Life_Obach,     
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Solubility_AqSolDB' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_Solubility_AqSolDB, 
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'Solubility_AqSolDB' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_Solubility_AqSolDB,   
+    SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'VDss_Lombardo' THEN A.ValueDetail ELSE NULL END), '[', 1) AS CT_VDss_Lombardo,   
+    SUBSTRING_INDEX(SUBSTRING_INDEX(MAX(CASE WHEN CT.Label = 'VDss_Lombardo' THEN A.ValueDetail ELSE NULL END), '[', -1), ']', 1) AS PER_VDss_Lombardo,  
+    M.Code,
+    M.Target,
+    M.Alias,
+    M.Comment,
+    M.Smiles,
+    M.HasActivity
+FROM
+    Activities AS A
+INNER JOIN
+    CaseTypes AS CT ON A.CaseTypeID = CT.ID
+INNER JOIN
+    CaseMolecules AS CM ON A.CaseMoleculeID = CM.ID
+RIGHT JOIN
+    Molecules AS M ON CM.MoleculeID = M.ID
+GROUP BY
+    M.ID;
+
+
+
+########################CADD########################
+
+SELECT
+    M.ID,
+    M.Code,
+    M.Smiles,
+    M.Target,
+    MAX(CASE WHEN CT.Label = 'mmgbsa-E17K' THEN A.ValueDetail ELSE NULL END) AS CT_mmgbsa_E17K,
+    MAX(CASE WHEN CT.Label = 'rms-E17K' THEN A.ValueDetail ELSE NULL END) AS CT_rms_E17K,
+    MAX(CASE WHEN CT.Label = 'mmgbsa-WT' THEN A.ValueDetail ELSE NULL END) AS CT_mmgbsa_WT,
+    MAX(CASE WHEN CT.Label = 'rms-WT' THEN A.ValueDetail ELSE NULL END) AS CT_rms_WT,
+    MAX(CASE WHEN CT.Label = 'mmbsa-AKT2' THEN A.ValueDetail ELSE NULL END) AS CT_mmbsa_AKT2,
+    MAX(CASE WHEN CT.Label = 'rms-AKT2' THEN A.ValueDetail ELSE NULL END) AS CT_rms_AKT2K,
+    MAX(CASE WHEN CT.Label = 'Cdock-E17K' THEN A.ValueDetail ELSE NULL END) AS CT_Cdock_E17K,
+    MAX(CASE WHEN CT.Label = 'cdock-WT' THEN A.ValueDetail ELSE NULL END) AS CT_cdock_WT,
+    MAX(CASE WHEN CT.Label = 'cdock-AKT2' THEN A.ValueDetail ELSE NULL END) AS CT_cdock_AKT2,
+    MAX(CASE WHEN CT.Label = 'qsar' THEN A.ValueDetail ELSE NULL END) AS CT_qsar,
+    MAX(CASE WHEN CT.Label = 'mmgbsa-EGFR' THEN A.ValueDetail ELSE NULL END) AS CT_mmgbsa_EGFR,
+    MAX(CASE WHEN CT.Label = 'rms-EGFR' THEN A.ValueDetail ELSE NULL END) AS CT_rms_EGFR,
+    MAX(CASE WHEN CT.Label = 'dGfep' THEN A.ValueDetail ELSE NULL END) AS CT_dGfep,
+    MAX(CASE WHEN CT.Label = 'boltz_value' THEN A.ValueDetail ELSE NULL END) AS CT_boltz_value,
+    MAX(CASE WHEN CT.Label = 'boltz_probability' THEN A.ValueDetail ELSE NULL END) AS CT_boltz_probability,
+    MAX(CASE WHEN CT.Label = 'dG_boltz' THEN A.ValueDetail ELSE NULL END) AS CT_dG_boltz
+FROM
+    Activities AS A
+INNER JOIN
+    CaseTypes AS CT ON A.CaseTypeID = CT.ID
+INNER JOIN
+    CaseMolecules AS CM ON A.CaseMoleculeID = CM.ID
+RIGHT JOIN
+    Molecules AS M ON CM.MoleculeID = M.ID
+GROUP BY
+    M.ID;
