@@ -44,3 +44,31 @@ step1.2, 更换headerxxx.csv表头,得RD0x_202xxxxx-UTF8.csv
 step2, `python average.py -i RD0x_202xxxxx-UTF8.csv -o RD0x_202xxxxx.csv`, 得均值表格RD0x_202xxxxx-ave.csv  
 step3.1, 打开RD0x_202xxxxx-ave.csv,目视检查,只取一个Batch,对应主键(主要筛选P1+空白,特殊Px替换P1), 存为RD0x_202xxxxx-update.csv(换算在datawarrior上进行)
 step4, 用dbeaver导入RD0x_202xxxxx-update.csv,以COMPOUNDS为主键,ON DUPLICATE KEY UPDATE  
+
+### 用docker管理mysql时: 
+    1.在docker-compose.yml对应文件下添加了镜像源加速安装  
+    2.datawarrior直接链接docker mysql, 将不同casetype分为不同column，以便数据处理(见Link2Mysql.txt)  
+    3.还原与备份, 需进docker container shell操作，外头的mysqldump和docker中mysql版本不匹配  
+    备份：  
+    docker ps  
+    docker exec -it ad9ccbe74b92 sh  
+    mysqldump -u root -pj7Cl6iCH17Y0 --all-databases --master-data=2 --single-transaction > /tmp/full_backup_2025xxx.sql  
+    exit  
+    docker cp ad9ccbe74b92:/tmp/full_backup_2025xxx.sql ./backup (若有必要)  
+    还原：  
+    docker ps  
+    docker exec -it ad9ccbe74b92 sh  
+    mysql -u root -pj7Cl6iCH17Y0 < /tmp/full_backup_2025xxx.sql (--one-database bio)  
+    exit  
+    4.常用命令  
+    docker ps -a  
+    docker compose stop (关闭docker-compose.yml中所有container)  
+    docker compose down (关闭移除所有container, -v 清除卷)  
+    docker compose up -d (后台启动所有container)  
+    docker compose restart  
+    docker volume --help  
+    docker system df  
+    systemctl status docker  
+    docker compose ps  
+    docker compose logs php-apache  
+    5.记录数据时，使用标准浮点数(for datawarrior);  
