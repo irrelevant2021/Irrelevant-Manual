@@ -1,0 +1,4 @@
+file-new form-select row  
+file-reverse pivoting-"data that you want to compare"  
+X axi "kind"-Y axi "unassigned"-Bar chart-mean value of "value"  
+colors "code"- separate cases "code"  
