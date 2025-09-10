@@ -43,6 +43,7 @@ import subprocess
 import numpy as np
 
 smiles = [smiles.strip() for smiles in sys.stdin]
+#smiles = ['c1ccccc1'] #测试
 
 # Everything from here to END is specific to the scorer
 
@@ -60,20 +61,35 @@ for smile in smiles:
 writer.close()
 
 schrodinger_path = os.environ.get('SCHRODINGER') #获取schrodinger路径
-executable_path = os.path.join(schrodinger_path, 'shape_screen')
-command_args = [
-        executable_path,
-        '-shape', ref_sdf,
-        '-screen', 'temp.sdf',
-        '-flex',
-        '-max', '50',
-        '-norm', '1',
-        '-HOST', 'localhost:20',
-        '-TMPLAUNCHDIR',
+
+executable_ligprep = os.path.join(schrodinger_path, 'ligprep')
+command_ligprep = [
+        executable_ligprep,
+        '-isd', 'temp.sdf',
+        '-osd', 'ligprep.sdf',
+        '-g',
+        '-s', '1',
+        '-i', '1',
+        '-HOST', 'localhost:128',
+        '-NJOBS', '50',
         '-WAIT'
     ]
 #DEVNULL非常重要,reinvnet通过获取输出来传递数据,所以除了json不能有其他输出
-subprocess.run(command_args, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+subprocess.run(command_ligprep, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+executable_shape = os.path.join(schrodinger_path, 'shape_screen')
+command_shape = [
+        executable_shape,
+        '-shape', ref_sdf,
+        '-screen', 'ligprep.sdf',
+        '-flex',
+        '-max', '50',
+        '-norm', '1',
+        '-HOST', 'localhost:128',
+        '-TMPLAUNCHDIR',
+        '-WAIT'
+    ]
+subprocess.run(command_shape, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 executable_convert = os.path.join(schrodinger_path, 'utilities/structconvert')
 command_sdf = [
