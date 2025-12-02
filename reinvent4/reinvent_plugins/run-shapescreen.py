@@ -27,6 +27,7 @@
 #[[stage.scoring.component.ExternalProcess.endpoint]]
 #name = "Shape Screen"
 #weight = 1.0
+#params.property = 'predictions'  ##needed after update
 #params.executable = "/home/xfusion/miniforge3/condabin/mamba"
 ##sys.argv[0]是run-shapescreen.py; sys.argv[1]是ref.sdf文件,不带.sdf
 #params.args = "run --no-capture-output -p /home/xfusion/miniforge3/envs/reinvent4 /home/xfusion/REINVENT4/support/run-shapescreen.py DY-0028"
