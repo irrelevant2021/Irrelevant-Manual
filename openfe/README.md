@@ -5,3 +5,8 @@
 `openfe view-ligand-network network_setup/ligand_network.graphml`  
 `openfe quickrun path/to/transformation.json -o results.json -d working-directory`  OR `bash run.py`  
 `openfe gather results/ --report dg -o final_results.tsv`  
+
+
+[https://github.com/OpenFreeEnergy/openfe_analysis/blob/main/README.md]  
+split .nc traj file for pymol read  
+`from MDAnalysis.coordinates.DCD import DCDWriter`   
