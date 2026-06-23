@@ -1,0 +1,23 @@
+import openfe
+from rdkit import Chem
+
+MyLigands = "gefitinib.sdf"
+
+supp = Chem.SDMolSupplier(MyLigands, removeHs=False)
+ligands = [openfe.SmallMoleculeComponent.from_rdkit(mol) for mol in supp]
+from openfe.protocols.openmm_utils.omm_settings import OpenFFPartialChargeSettings
+from openfe.protocols.openmm_utils.charge_generation import bulk_assign_partial_charges
+charge_settings = OpenFFPartialChargeSettings(partial_charge_method="am1bcc", off_toolkit_backend="ambertools")
+charged_ligands = bulk_assign_partial_charges(
+	molecules=ligands,
+	overwrite=False,
+	method=charge_settings.partial_charge_method,
+	toolkit_backend=charge_settings.off_toolkit_backend,
+	generate_n_conformers=charge_settings.number_of_conformers,
+	nagl_model=charge_settings.nagl_model,
+	processors=20
+ )
+
+with open('charged_ligands.sdf', 'w') as f: 
+	for mol in charged_ligands: 
+		f.write(mol.to_sdf()) 
