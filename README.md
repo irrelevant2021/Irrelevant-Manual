@@ -25,7 +25,7 @@ https://github.com/jwohlwend/boltz
 ## rosetta  
 protein-protein docking  
 https://docs.rosettacommons.org/docs/latest/Home  
-https://meilerlab.org/rosetta-workshop-2022/
+https://meilerlab.org/rosetta-workshop-2022/  
 https://github.com/karanicolaslab/PROTAC_ternary
 
 ## aizynthfinder  
