@@ -1,0 +1,61 @@
+$ROSETTA/main/source/scripts/python/public/molfile_to_params.py CBN.mol2 -n CBN -p CBN --conformers-in-one-file --chain=X
+$ROSETTA/main/source/scripts/python/public/molfile_to_params.py POI.mol2 -n POI -p POI --conformers-in-one-file --chain=Y
+
+sed -i '$ d' CBN.params
+sed -i '$ d' POI.params
+cat PP.pdb CBN.pdb POI.pdb > PPP.pdb
+
+$ROSETTA_BIN/docking_prepack_protocol.mpi.linuxgccrelease -s PPP.pdb -use_input_sc -extra_res_fa CBN.params POI.params
+mv PPP_0001.pdb TER.pdb
+
+mpirun -np 64 $ROSETTA_BIN/docking_protocol.mpi.linuxgccrelease -s TER.pdb -nstruct 4096 -use_input_sc -spin -dock_pert 5 20 -partners BX_CY -ex1 -ex2aro -load_PDB_components false -extra_res_fa CBN.params POI.params -out:file:scorefile score.sc -score:docking_interface_score
+
+mkdir ppd
+mv TER_*.pdb ppd
+
+ls ppd/TER_*.pdb > decoy_list.txt
+ls linkers/*.pdb > linker_list.txt
+
+python ../ternary_model_prediction.py \
+ -la linker_atom_list.txt \
+ -da decoy_atom_list.txt \
+ -dl decoy_list.txt \
+ -ll linker_list.txt \
+ -wd decoy_atom_list_delete.txt \
+ -c 0.4 \
+ -t default \
+ -r rmsd.txt
+
+mkdir build
+mv ternary*.pdb build
+cd build
+
+for f in ternary*.pdb; do
+  sed -i '/LG1/!s/HETATM/ATOM  /g' "$f"
+done
+
+ls ternary*.pdb > pdb_list.txt
+
+export BABEL=/home/xfusion/miniforge3/envs/maize/bin/obabel
+export MOL2PARAMS=/home/xfusion/rosetta/rosetta.source.release-408/main/source/scripts/python/public/molfile_to_params.py
+python ../../Ternary_modifier/ternary_modify.py -s pdb_list.txt
+
+cd ../loop
+python extract_chain.py
+
+mkdir ../mini
+cd ../mini
+
+for pdb in ../loop/*_mod_loop.pdb; do
+    base=$(basename "$pdb" _mod_loop.pdb)
+    params="../build/${base}.params"
+    if [ -f "$params" ]; then
+        echo "Processing ${base}..."
+        $ROSETTA/main/source/bin/minimize_ppi.mpi.linuxgccrelease \
+            -s "$pdb" \
+            -extra_res_fa "$params" \
+            -jump_all \
+            -out:file:scorefile "${base}_score.sc" \
+            > "${base}_minimize.log" 2>&1
+    fi
+done
