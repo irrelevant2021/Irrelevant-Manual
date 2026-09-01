@@ -1,5 +1,5 @@
 #Because of Periodic boundary condition (PBC), sometimes your ligand seems to be splitted from recepter in traj files.
-#Using cpptraj to fix that, and the output of make-it-rain ('prot_lig_prod1-*_whole.dcd') can't be deal with correctly.
+#Using cpptraj to fix that, and the output of make-it-rain ('prot_lig_prod1-*_whole.dcd') can't be deal with correctly.因为whole.dcd是合并后align处理过的,在一些情况下autoimga或mda的unwrap不能正常识别某一帧是否超过PBC了,应该PBC修复后再合并对齐,MD py需要修改
 
 # 04/17/25 15:04:19
 # Args:  -p SYS_gaff2.prmtop -y prot_lig_prod_1.dcd prot_lig_prod_2.dcd prot_lig_prod_3.dcd prot_lig_prod_4.dcd prot_lig_prod_5.dcd
