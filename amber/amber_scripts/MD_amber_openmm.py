@@ -529,6 +529,7 @@ print("\n> Finished!\n")
 
 import MDAnalysis as mda
 from MDAnalysis.analysis import align, rms
+from MDAnalysis import transformations as mda_trans
 
 #Google_Drive_Path = '/content/drive/MyDrive/MD/CBL-B/2022-12-22' #@param {type:"string"}
 #workDir = Google_Drive_Path
@@ -567,6 +568,11 @@ flist = [template % str(i) for i in range(int(first_stride), int(first_stride) +
 ref = [template % int(1)]
 
 u1 = mda.Universe(os.path.join(workDir, "SYS_gaff2.prmtop"), flist)
+# 追踪式 PBC 解折叠：修正分子在帧间跨边界导致的"闪现"问题
+# NoJump 在迭代轨迹时自动逐帧应用，必须在 AlignTraj 之前执行
+# nojump 可能异常拉扯水分子,因为是逐原子对上一帧判断其是否"闪现",但这不影响任何计算结果(无显示水参与计算)
+u1.trajectory.add_transformations(mda_trans.NoJump())
+
 u2 = mda.Universe(os.path.join(workDir, "SYS_gaff2.prmtop"), ref)
 
 u2.trajectory[0] # set u2 to first frame
@@ -856,7 +862,7 @@ raw_data.to_csv(os.path.join(workDir, Output_name + ".csv"))
 from prolif.plotting.network import LigNetwork
 
 import prolif as plf
-u = mda.Universe('SYS_nw.prmtop', 'prot_lig_prod1-2_nw.dcd') #mod
+u = mda.Universe('SYS_nw.prmtop', nw_dcd) #mod
 
 lig = u.select_atoms('resname LIG')
 prot = u.select_atoms('protein')
