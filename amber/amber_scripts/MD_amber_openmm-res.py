@@ -223,6 +223,8 @@ system.addForce(MonteCarloBarostat(pressure, temperature))
 print("\t- Setting integrator...")
 integrator = LangevinIntegrator(temperature, friction, dt)
 integrator.setConstraintTolerance(constraintTolerance)
+platform = Platform.getPlatformByName('CUDA')
+properties = {'DeviceIndex': 'WhichCUDA', 'Precision': 'mixed'}
 simulation = Simulation(prmtop.topology, system, integrator)
 simulation.context.setPositions(inpcrd.positions)
 if inpcrd.boxVectors is not None:
@@ -458,6 +460,8 @@ system.addForce(MonteCarloBarostat(pressure, temperature))
 print("\t- Setting integrator...")
 integrator = LangevinIntegrator(temperature, friction, dt)
 integrator.setConstraintTolerance(constraintTolerance)
+platform = Platform.getPlatformByName('CUDA')
+properties = {'DeviceIndex': 'WhichCUDA', 'Precision': 'mixed'}
 simulation = Simulation(prmtop.topology, system, integrator)
 simulation.context.setPositions(inpcrd.positions)
 if inpcrd.boxVectors is not None:
