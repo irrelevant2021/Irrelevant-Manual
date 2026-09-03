@@ -225,7 +225,7 @@ integrator = LangevinIntegrator(temperature, friction, dt)
 integrator.setConstraintTolerance(constraintTolerance)
 platform = Platform.getPlatformByName('CUDA')
 properties = {'DeviceIndex': 'WhichCUDA', 'Precision': 'mixed'}
-simulation = Simulation(prmtop.topology, system, integrator)
+simulation = Simulation(prmtop.topology, system, integrator, platform, properties)
 simulation.context.setPositions(inpcrd.positions)
 if inpcrd.boxVectors is not None:
     simulation.context.setPeriodicBoxVectors(*inpcrd.boxVectors)
@@ -455,7 +455,7 @@ integrator = LangevinIntegrator(temperature, friction, dt)
 integrator.setConstraintTolerance(constraintTolerance)
 platform = Platform.getPlatformByName('CUDA')
 properties = {'DeviceIndex': 'WhichCUDA', 'Precision': 'mixed'}
-simulation = Simulation(prmtop.topology, system, integrator)
+simulation = Simulation(prmtop.topology, system, integrator, platform, properties)
 simulation.context.setPositions(inpcrd.positions)
 if inpcrd.boxVectors is not None:
 	simulation.context.setPeriodicBoxVectors(*inpcrd.boxVectors)
