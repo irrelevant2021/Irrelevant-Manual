@@ -13,14 +13,27 @@ mpirun -np 64 $ROSETTA_BIN/docking_protocol.mpi.linuxgccrelease -s TER.pdb -nstr
 mkdir ppd
 mv TER_*.pdb ppd
 
-ls ppd/TER_*.pdb > decoy_list.txt
-ls linkers/*.pdb > linker_list.txt
-
 cd atomlist
 python ../../auto_generate_atom_lists.py -cbn ../CBN.pdb -poi ../POI.pdb --cbn_mol2 ../CBN.mol2 --poi_mol2 ../POI.mol2 -l ../linkers/DY-0417_1.pdb --poi_smarts '[C]#[N]' --delete auto_decoy_atom_list_delete.txt
 cd ..
 
-python ../ternary_model_prediction.py \
+ls ppd/TER_*.pdb > decoy_list.txt
+ls linkers/*.pdb > linker_list.txt
+
+# Original single-threaded version (slow):
+# python ../ternary_model_prediction.py \
+#  -la ./atomlist/auto_linker_atom_list.txt \
+#  -da ./atomlist/auto_decoy_atom_list.txt \
+#  -dl decoy_list.txt \
+#  -ll linker_list.txt \
+#  -wd ./atomlist/auto_decoy_atom_list_delete.txt \
+#  -c 0.4 \
+#  -t default \
+#  -r rmsd.txt
+
+# Parallel version: split decoy_list.txt into N parts and run simultaneously
+# Adjust -n to your number of CPU cores (e.g., 8, 16, 32)
+python ../run_parallel_ternary.py \
  -la ./atomlist/auto_linker_atom_list.txt \
  -da ./atomlist/auto_decoy_atom_list.txt \
  -dl decoy_list.txt \
@@ -28,7 +41,8 @@ python ../ternary_model_prediction.py \
  -wd ./atomlist/auto_decoy_atom_list_delete.txt \
  -c 0.4 \
  -t default \
- -r rmsd.txt
+ -r rmsd.txt \
+ -n 8
 
 mkdir build
 mv ternary*.pdb build
