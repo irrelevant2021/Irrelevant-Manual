@@ -16,7 +16,7 @@ mv TER_*.pdb ppd
 python calc_cbn_poi_distance.py
 
 cd build
-bash batch_pipeline.sh 6 ../ppd ../linkers/ .
+bash batch_pipeline.sh --cbn-core "MCS" --poi-core "N#Cc1ccccc1" 6 ../ppd ../linkers/ .
 
 ls DY-xxx/*.pdb > pdb_list.txt
 
