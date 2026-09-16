@@ -18,13 +18,19 @@ python calc_cbn_poi_distance.py
 cd build
 bash batch_pipeline.sh --cbn-core "MCS" --poi-core "N#Cc1ccccc1" 6 ../ppd ../linkers/ .
 
-ls DY-xxx/*.pdb > pdb_list.txt
+cd DY-xxx
+ls *.pdb > pdb_list.txt
 
 export BABEL=/home/xfusion/miniforge3/envs/maize/bin/obabel
 export MOL2PARAMS=/home/xfusion/rosetta/rosetta.source.release-408/main/source/scripts/python/public/molfile_to_params.py
-python ../../Ternary_modifier/ternary_modify.py -s pdb_list.txt
 
-cd ../loop
+while IFS= read -r pdb; do
+  [ -z "$pdb" ] && continue
+  echo "$pdb" > /tmp/_single_pdb.txt
+  python ../../Ternary_modifier/ternary_modify.py -s /tmp/_single_pdb.txt && echo "OK: $pdb" || echo "FAILED (skipping): $pdb"
+done < pdb_list.txt
+
+cd ../../loop
 python extract_chain.py
 
 mkdir ../mini
