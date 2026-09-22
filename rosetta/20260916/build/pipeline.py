@@ -198,8 +198,10 @@ def step2_align(linker_mae, cbn_sdf, poi_sdf, tmpdir, schro,
                 for fn in ('linker.sdf', f'{label}.sdf'):
                     with open(fn) as f: out.write(f.read())
             aligned = f'aligned_{label}.sdf'
-            run_cmd([align, merged, '-ref', '2', '-core', core, '-o', aligned],
-                    desc=f'align_ligands -> {label}', logfile=logfile)
+            aln_cmd = [align, merged, '-ref', '2', '-o', aligned]
+            if core:
+                aln_cmd += ['-core', core]
+            run_cmd(aln_cmd, desc=f'align_ligands -> {label}', logfile=logfile)
             print('    Waiting for job...')
             if not wait_for_job(f'merged_{label}', timeout=120, logfile=logfile):
                 sys.exit(1)
@@ -259,6 +261,17 @@ def step3_hybrid_assembly(to_cbn_sdf, to_poi_sdf, tmpdir, logfile):
     cbn_core = parse_frozen(mol_cbn)
     poi_core = parse_frozen(mol_poi)
     print(f'  CBN core: {len(cbn_core)}, POI core: {len(poi_core)}')
+
+    # Fallback: if align_ligands did not set frozen atoms, use all heavy atoms
+    if not cbn_core:
+        print('  WARNING: CBN core empty — fallback to all heavy atoms')
+        cbn_core = {i for i in range(n)
+                     if mol_cbn.GetAtomWithIdx(i).GetAtomicNum() > 1}
+    if not poi_core:
+        print('  WARNING: POI core empty — fallback to all heavy atoms')
+        poi_core = {i for i in range(n)
+                     if mol_poi.GetAtomWithIdx(i).GetAtomicNum() > 1}
+    print(f'  After fallback — CBN core: {len(cbn_core)}, POI core: {len(poi_core)}')
 
     # BFS classification
     adj = [[] for _ in range(n)]
@@ -463,8 +476,10 @@ def main():
     parser.add_argument('--pdb', required=True, help='Rosetta 三元 PDB')
     parser.add_argument('--mae', required=True, help='PROTAC linker MAE 文件')
     parser.add_argument('-o','--output', required=True, help='输出 PDB')
-    parser.add_argument('--cbn-core', default='MCS', help='CBN 对齐核心')
-    parser.add_argument('--poi-core', default='N#Cc1ccccc1', help='POI 对齐核心')
+    parser.add_argument('--cbn-core', default=None,
+                        help='CBN 对齐核心 SMARTS (默认: 让 align_ligands 自动 MCS)')
+    parser.add_argument('--poi-core', default='N#Cc1ccccc1',
+                        help='POI 对齐核心 SMARTS (默认: N#Cc1ccccc1)')
     parser.add_argument('--n-confs', type=int, default=200, help='扭转采样数')
     parser.add_argument('--seed', type=int, default=42, help='随机种子')
     parser.add_argument('--schrodinger', help='Schrödinger 路径')
